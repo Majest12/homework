@@ -5,7 +5,7 @@
     <title>My Homework</title>
 </head>
 <body>
-    <h1>Hello everyone!</h1>
-    <p>This is my advanced programing Project displayed on GitHub Pages.</p>
+    <h1>Elvis Abongnifor!</h1>
+    <p>This is my advanced programing Project.</p>
 </body>
 </html>
