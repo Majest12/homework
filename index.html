@@ -6,21 +6,22 @@
     <style>
         body { font-family: Arial, sans-serif; margin:0; padding:0; }
         
-        /* Navbar */
+        /* Navbar styling */
         .navbar { background-color: #333; overflow: hidden; }
         .navbar a, .dropbtn { float: left; color: #f2f2f2; text-align: center; 
                                padding: 14px 16px; text-decoration: none; cursor: pointer; }
         .navbar a:hover, .dropbtn:hover { background-color: #ddd; color: black; }
         
-        /* Dropdown */
+        /* Dropdown menu styling */
         .dropdown { float: left; overflow: hidden; }
-        .dropdown-content { display: none; position: absolute; background-color: #f9f9f9; 
-                            min-width: 160px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index:1; }
+        .dropdown-content { display: none; position: absolute; 
+                            background-color: #f9f9f9; min-width: 160px; 
+                            box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index:1; }
         .dropdown-content a { display: block; color: black; padding: 12px 16px; text-decoration: none; }
         .dropdown-content a:hover { background-color: #ddd; }
         .dropdown:hover .dropdown-content { display: block; }
-        
-        /* Content sections */
+
+        /* Main content styling */
         .content { padding: 20px; }
         .section { display: none; } /* hide all sections initially */
         img { max-width: 300px; margin: 10px; border: 2px solid #333; }
@@ -43,37 +44,37 @@
 
     <!-- Main content -->
     <div class="content">
-        <!-- Home Section -->
+        <!-- Home section -->
         <div id="home" class="section">
             <h1>Welcome to My Homework Site</h1>
             <p>Use the "Assignments" menu above to navigate to Task 1 or Task 2.</p>
         </div>
 
-        <!-- Task 1 Section (Images) -->
+        <!-- Task 1 section -->
         <div id="task1" class="section">
             <h1>Task 1: Pictures</h1>
-            <p>Here are your images for Task 1:</p>
+            <p>Here are some images for Task 1:</p>
             <img src="images/pic1.jpg" alt="Picture 1">
             <img src="images/pic2.jpg" alt="Picture 2">
         </div>
 
-        <!-- Task 2 Section (Content) -->
+        <!-- Task 2 section -->
         <div id="task2" class="section">
-            <h1>Task 2: Content</h1>
-            <p>This is your content for Task 2. You can write instructions, explanations, or any text you want here.</p>
-            <p>Example: Describe your homework progress, tips, or include links to resources.</p>
+            <h1>Task 2: Contents</h1>
+            <p>This is your content for Task 2. You can add instructions, explanations, or any text you want to display here.</p>
+            <p>Example: Write about your homework progress, tips, or links to resources.</p>
         </div>
     </div>
 
-    <!-- JavaScript to switch sections -->
     <script>
+        // Function to show selected section and hide others
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.section');
-            sections.forEach(sec => sec.style.display = 'none');
-            document.getElementById(sectionId).style.display = 'block';
+            sections.forEach(sec => sec.style.display = 'none'); // hide all
+            document.getElementById(sectionId).style.display = 'block'; // show selected
         }
 
-        // Show home by default
+        // Show Home section by default
         showSection('home');
     </script>
 
