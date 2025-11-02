@@ -1,5 +1,5 @@
 # homework
-<!DOCTYPE html>
+<!ADVANCED PROGRAMMING PROJECT html>
 <html>
 <head>
     <title>My Homework</title>
