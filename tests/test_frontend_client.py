@@ -2,6 +2,7 @@ import unittest
 import requests_mock
 import os
 import sys
+import requests # <--- ADD THIS LINE
 
 # --- Path Fix ---
 # This line adds the project root to the Python path so imports like 'from frontend.api_client import ...' work.
