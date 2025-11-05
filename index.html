@@ -3,119 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Pages Website</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Online Library (Bookstore) Project</title>
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
     <header>
-        <h1>My GitHub Pages Website</h1>
+        <h1>📚 Online Library (Bookstore) Project</h1>
+        <p>A Full-Stack Python Solution: Flask Backend + PyQt GUI Frontend</p>
     </header>
+
     <main>
-        <section id="text-elements">
-            <h2>Text Elements</h2>
-            <p>This section demonstrates various text formatting options.</p>
-            <h3>Headings</h3>
-            <h1>Heading 1</h1>
-            <h2>Heading 2</h2>
-            <h3>Heading 3</h3>
-            <h4>Heading 4</h4>
-            <h5>Heading 5</h5>
-            <h6>Heading 6</h6>
-
-            <h3>Paragraphs</h3>
-            <p>This is a standard paragraph. It contains some example text to demonstrate how paragraphs are displayed. We can add more sentences to make it a bit longer and see how it wraps.</p>
-
-            <h3>Lists</h3>
-            <h4>Unordered List</h4>
+        <section id="project-overview">
+            <h2>Project Overview & Requirements</h2>
+            <p>This software solution manages metadata for various media types, providing a persistent backend API and a user-friendly graphical interface (GUI).</p>
+            
+            <h3>Media Categories</h3>
             <ul>
-                <li>List item 1</li>
-                <li>List item 2</li>
-                <li>List item 3</li>
+                <li><strong>Book</strong></li>
+                <li><strong>Film</strong></li>
+                <li><strong>Magazine</strong></li>
             </ul>
 
-            <h4>Ordered List</h4>
+            <h3>Stored Metadata</h3>
             <ol>
-                <li>First item</li>
-                <li>Second item</li>
-                <li>Third item</li>
+                <li>Name (Title)</li>
+                <li>Publication date</li>
+                <li>Author (or Director/Creator)</li>
+                <li>Category</li>
             </ol>
+        </section>
 
-            <h3>Code Blocks</h3>
-            <pre><code>
-# This is a code block
-print("Hello, World!")
-def my_function():
-    pass
-            </code></pre>
-
-            <h3>Blockquotes</h3>
+        <section id="architecture">
+            <h2>System Architecture</h2>
+            <p>The system uses a two-tier architecture:</p>
             <blockquote>
-                <p>This is a blockquote. It is used to quote a block of text from another source.</p>
-                <cite>- Someone Famous</cite>
+                <p>The **Backend (Flask)** handles data persistence (JSON/Pickle) and API requests. The **Frontend (PyQt/PySide)** is a desktop GUI application that acts as the client, communicating with the backend via HTTP/JSON.</p>
+                <cite>Concept Documentation (Task 1)</cite>
             </blockquote>
         </section>
 
-        <section id="tables">
-            <h2>Tables</h2>
+        <section id="backend-api">
+            <h2>Backend (Flask) HTTP Endpoints</h2>
+            <p>The API provides the following endpoints for media management (CRUD operations):</p>
+            
             <table>
                 <thead>
                     <tr>
-                        <th>Header 1</th>
-                        <th>Header 2</th>
-                        <th>Header 3</th>
+                        <th>#</th>
+                        <th>Function</th>
+                        <th>Method</th>
+                        <th>Endpoint (Example)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Data 1</td>
-                        <td>Data 2</td>
-                        <td>Data 3</td>
+                        <td>1</td>
+                        <td>List All Media</td>
+                        <td>GET</td>
+                        <td><code>/media</code></td>
                     </tr>
                     <tr>
-                        <td>Data 4</td>
-                        <td>Data 5</td>
-                        <td>Data 6</td>
+                        <td>2</td>
+                        <td>List by Category</td>
+                        <td>GET</td>
+                        <td><code>/media/category/Book</code></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Search by Name (Exact)</td>
+                        <td>GET</td>
+                        <td><code>/media/search?name=Dune</code></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Display Metadata</td>
+                        <td>GET</td>
+                        <td><code>/media/123</code></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Create New Media</td>
+                        <td>POST</td>
+                        <td><code>/media</code></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Delete Specific Media</td>
+                        <td>DELETE</td>
+                        <td><code>/media/123</code></td>
                     </tr>
                 </tbody>
             </table>
         </section>
-
-        <section id="buttons">
-            <h2>Buttons</h2>
-            <button>Click Me</button>
-            <button class="alt">Alternate Button</button>
-        </section>
-
-        <section id="forms">
-            <h2>Forms</h2>
+        
+        <section id="frontend-features">
+            <h2>Frontend (GUI) Features</h2>
+            <p>The client application enables users to perform all required interactions:</p>
+            <ul>
+                <li>Display the full list of media.</li>
+                <li>Filter media using a <strong>Category Dropdown</strong>.</li>
+                <li>Search media using an <strong>Exact Match Name Input</strong>.</li>
+                <li>Display detailed metadata upon item selection.</li>
+                <li>Dedicated interfaces for **Creating** and **Deleting** media items.</li>
+            </ul>
+            
+            <h3>GUI Mockup</h3>
             <form>
                 <div>
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name">
+                    <label for="category-filter">Filter Category:</label>
+                    <select id="category-filter" name="category">
+                        <option>All</option>
+                        <option>Book</option>
+                        <option>Film</option>
+                        <option>Magazine</option>
+                    </select>
                 </div>
                 <div>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email">
+                    <label for="search-name">Search Name (Exact):</label>
+                    <input type="text" id="search-name" placeholder="Enter media title...">
                 </div>
-                <div>
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message"></textarea>
-                </div>
-                <div>
-                    <input type="submit" value="Submit">
-                </div>
+                <button type="button">Search</button>
+                <button type="button">Create New</button>
             </form>
-        </section>
-
-        <section id="images">
-            <h2>Images</h2>
-            <!-- Placeholder for an image -->
-            <img src="https://via.placeholder.com/400x200" alt="Placeholder Image">
         </section>
 
     </main>
     <footer>
-        <p>&copy; 2025 My Website</p>
+        <p>Code available on GitHub. &copy; 2025 Online Library Project</p>
     </footer>
 </body>
 </html>
