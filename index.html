@@ -106,25 +106,67 @@
                 <li>Display detailed metadata upon item selection.</li>
                 <li>Dedicated interfaces for **Creating** and **Deleting** media items.</li>
             </ul>
-            
-            <h3>GUI Mockup</h3>
-            <form>
-                <div>
-                    <label for="category-filter">Filter Category:</label>
-                    <select id="category-filter" name="category">
-                        <option>All</option>
-                        <option>Book</option>
-                        <option>Film</option>
-                        <option>Magazine</option>
-                    </select>
+        </section>
+
+        <section id="mock-interaction">
+            <h2>🔗 Interactive Demo Simulation (Static)</h2>
+            <p>This section simulates the core GUI functionality (List, Select, View Details) using pure HTML/CSS:</p>
+
+            <div class="mock-layout-container">
+                <div class="mock-list-panel">
+                    <h3>Media List (Click to View Details)</h3>
+                    <ul>
+                        <li><a href="#detail-martian">The Martian</a> (Book)</li>
+                        <li><a href="#detail-dune">Dune</a> (Film)</li>
+                        <li><a href="#detail-time">Time Magazine</a> (Magazine)</li>
+                        <li><a href="#detail-default">Click Here to View Default Message</a></li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 30px;">GUI Controls Mockup:</h3>
+                    <form style="display: flex; flex-direction: column; gap: 10px;">
+                        <select id="category-filter" name="category" disabled>
+                            <option>All</option>
+                            <option>Book</option>
+                        </select>
+                        <input type="text" id="search-name" placeholder="Enter media title..." disabled>
+                        <button type="button" disabled>Search</button>
+                        <button type="button" disabled>Create New</button>
+                    </form>
                 </div>
-                <div>
-                    <label for="search-name">Search Name (Exact):</label>
-                    <input type="text" id="search-name" placeholder="Enter media title...">
+
+                <div class="mock-detail-panel">
+                    <h3>Metadata Detail View</h3>
+                    
+                    <div id="detail-martian" class="media-detail-block">
+                        <h4>"The Martian" (Book)</h4>
+                        <p><strong>Author:</strong> Andy Weir</p>
+                        <p><strong>Publication Date:</strong> 2011</p>
+                        <p><strong>Category:</strong> Book</p>
+                        <p><em>Simulates the detail panel being updated after selection.</em></p>
+                    </div>
+
+                    <div id="detail-dune" class="media-detail-block">
+                        <h4>"Dune" (Film)</h4>
+                        <p><strong>Author:</strong> Denis Villeneuve</p>
+                        <p><strong>Publication Date:</strong> 2021</p>
+                        <p><strong>Category:</strong> Film</p>
+                        <p><em>Simulates the detail panel being updated after selection.</em></p>
+                    </div>
+                    
+                    <div id="detail-time" class="media-detail-block">
+                        <h4>"Time Magazine" (Magazine)</h4>
+                        <p><strong>Author:</strong> Various</p>
+                        <p><strong>Publication Date:</strong> 2023</p>
+                        <p><strong>Category:</strong> Magazine</p>
+                        <p><em>Simulates the detail panel being updated after selection.</em></p>
+                    </div>
+
+                    <div id="detail-default" class="media-detail-block default-detail">
+                        <p>👈 **Please click any media item in the list on the left to simulate loading its details.**</p>
+                        <p>This interaction demonstrates the required functionality of the desktop GUI's selection and detail panel.</p>
+                    </div>
                 </div>
-                <button type="button">Search</button>
-                <button type="button">Create New</button>
-            </form>
+            </div>
         </section>
 
     </main>
