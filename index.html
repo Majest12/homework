@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Library (Bookstore) Project</title>
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -34,12 +34,9 @@
             </li>
         </ul>
         <div class="search-container">
-            <input type="text" placeholder="Search media...">
-            <ul class="search-dropdown">
-                <li><a href="#detail-martian">The Martian</a></li>
-                <li><a href="#detail-dune">Dune</a></li>
-                <li><a href="#detail-time">Time Magazine</a></li>
-            </ul>
+            <input type="text" id="search-input" placeholder="Search media...">
+            <!-- Search results container -->
+            <div class="search-results" id="search-results"></div>
         </div>
     </nav>
 
@@ -47,14 +44,12 @@
         <section id="project-overview">
             <h2>Project Overview & Requirements</h2>
             <p>This software solution manages metadata for various media types, providing a persistent backend API and a user-friendly graphical interface (GUI).</p>
-            
             <h3>Media Categories</h3>
             <ul>
                 <li><strong>Book</strong></li>
                 <li><strong>Film</strong></li>
                 <li><strong>Magazine</strong></li>
             </ul>
-
             <h3>Stored Metadata</h3>
             <ol>
                 <li>Name (Title)</li>
@@ -118,90 +113,3 @@
                     </tr>
                     <tr>
                         <td>6</td>
-                        <td>Delete Specific Media</td>
-                        <td>DELETE</td>
-                        <td><code>/media/123</code></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        
-        <section id="frontend-features">
-            <h2>Frontend (GUI) Features</h2>
-            <p>The client application enables users to perform all required interactions:</p>
-            <ul>
-                <li>Display the full list of media.</li>
-                <li>Filter media using a <strong>Category Dropdown</strong>.</li>
-                <li>Search media using an <strong>Exact Match Name Input</strong>.</li>
-                <li>Display detailed metadata upon item selection.</li>
-                <li>Dedicated interfaces for <strong>Creating</strong> and <strong>Deleting</strong> media items.</li>
-            </ul>
-        </section>
-
-        <section id="mock-interaction">
-            <h2>🔗 Interactive Demo Simulation (Static)</h2>
-            <p>This section simulates the core GUI functionality (List, Select, View Details) using pure HTML/CSS:</p>
-
-            <div class="mock-layout-container">
-                <div class="mock-list-panel">
-                    <h3>Media List (Click to View Details)</h3>
-                    <ul>
-                        <li><a href="#detail-martian">The Martian</a> (Book)</li>
-                        <li><a href="#detail-dune">Dune</a> (Film)</li>
-                        <li><a href="#detail-time">Time Magazine</a> (Magazine)</li>
-                        <li><a href="#detail-default">Click Here to View Default Message</a></li>
-                    </ul>
-                    
-                    <h3 style="margin-top: 30px;">GUI Controls Mockup:</h3>
-                    <form style="display: flex; flex-direction: column; gap: 10px;">
-                        <select id="category-filter" name="category" disabled>
-                            <option>All</option>
-                            <option>Book</option>
-                        </select>
-                        <input type="text" id="search-name" placeholder="Enter media title..." disabled>
-                        <button type="button" disabled>Search</button>
-                        <button type="button" disabled>Create New</button>
-                    </form>
-                </div>
-
-                <div class="mock-detail-panel">
-                    <h3>Metadata Detail View</h3>
-                    
-                    <div id="detail-martian" class="media-detail-block">
-                        <h4>"The Martian" (Book)</h4>
-                        <p><strong>Author:</strong> Andy Weir</p>
-                        <p><strong>Publication Date:</strong> 2011</p>
-                        <p><strong>Category:</strong> Book</p>
-                        <p><em>Simulates the detail panel being updated after selection.</em></p>
-                    </div>
-
-                    <div id="detail-dune" class="media-detail-block">
-                        <h4>"Dune" (Film)</h4>
-                        <p><strong>Author:</strong> Denis Villeneuve</p>
-                        <p><strong>Publication Date:</strong> 2021</p>
-                        <p><strong>Category:</strong> Film</p>
-                        <p><em>Simulates the detail panel being updated after selection.</em></p>
-                    </div>
-                    
-                    <div id="detail-time" class="media-detail-block">
-                        <h4>"Time Magazine" (Magazine)</h4>
-                        <p><strong>Author:</strong> Various</p>
-                        <p><strong>Publication Date:</strong> 2023</p>
-                        <p><strong>Category:</strong> Magazine</p>
-                        <p><em>Simulates the detail panel being updated after selection.</em></p>
-                    </div>
-
-                    <div id="detail-default" class="media-detail-block default-detail">
-                        <p>👈 **Please click any media item in the list on the left to simulate loading its details.**</p>
-                        <p>This interaction demonstrates the required functionality of the desktop GUI's selection and detail panel.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-    <footer>
-        <p>Code available on GitHub. &copy; 2025 Online Library Project</p>
-    </footer>
-</body>
-</html>
