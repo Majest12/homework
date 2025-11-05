@@ -1,0 +1,23 @@
+{
+    "1": {
+        "id": "1",
+        "Name": "The Martian",
+        "Publication date": "2011",
+        "Author": "Andy Weir",
+        "Category": "Book"
+    },
+    "2": {
+        "id": "2",
+        "Name": "Dune",
+        "Publication date": "2021",
+        "Author": "Denis Villeneuve",
+        "Category": "Film"
+    },
+    "3": {
+        "id": "3",
+        "Name": "Time Magazine",
+        "Publication date": "2023",
+        "Author": "Various",
+        "Category": "Magazine"
+    }
+}
