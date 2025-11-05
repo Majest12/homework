@@ -137,9 +137,9 @@ nav {
     position: relative;
 }
 
-/* Add dropdown arrow indicator */
+/* Dropdown arrow indicator */
 .nav-menu > li > a::after {
-    content: " ▼"; /* Downward arrow */
+    content: " ▼";
     font-size: 0.7em;
     margin-left: 5px;
     transition: transform 0.3s ease;
@@ -162,7 +162,7 @@ nav {
     border-radius: 4px 4px 0 0;
 }
 
-/* Animated Dropdown */
+/* Animated dropdown */
 .dropdown {
     display: block;
     max-height: 0;
@@ -177,11 +177,13 @@ nav {
     border-radius: 0 0 6px 6px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     z-index: 1000;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
 }
 
 .nav-menu li:hover .dropdown {
-    max-height: 500px; /* Expand to show all items */
+    max-height: 500px;
+    opacity: 1;
 }
 
 .dropdown li a {
@@ -225,7 +227,8 @@ nav {
     border-radius: 0 0 6px 6px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     z-index: 100;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
 }
 
 .search-dropdown li a {
@@ -241,6 +244,7 @@ nav {
 
 .search-container:hover .search-dropdown {
     max-height: 500px;
+    opacity: 1;
 }
 
 /* --- Mock Interaction Panel --- */
@@ -259,9 +263,12 @@ nav {
     border: 1px solid #cceeff;
 }
 
-.mock-list-panel ul {
-    list-style: none;
-    padding: 0;
+/* List fade/slide-in effect */
+.mock-list-panel ul li {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: fadeSlideIn 0.5s forwards;
+    animation-delay: calc(var(--i) * 0.1s);
 }
 
 .mock-list-panel ul li a {
@@ -279,6 +286,11 @@ nav {
     border-left: 5px solid #00e1ff;
 }
 
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
 .mock-detail-panel {
     flex: 2;
     padding: 15px;
@@ -287,17 +299,23 @@ nav {
     background-color: #ffffff;
 }
 
+/* Fade/slide for details */
 .media-detail-block {
     display: none;
     padding: 10px;
     border: 1px dashed #ccc;
     border-radius: 4px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .media-detail-block:target {
     display: block;
     border: 1px solid #007bff;
     background-color: #e6f0ff;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 #detail-default {
