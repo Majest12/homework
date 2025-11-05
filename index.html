@@ -12,19 +12,62 @@
         <p>A Full-Stack Python Solution: Flask Backend + PyQt GUI Frontend</p>
     </header>
 
+    <!-- --- Navigation Bar --- -->
+    <nav>
+        <ul>
+            <li>
+                <a href="#">Project Overview</a>
+                <ul>
+                    <li><a href="#media-categories">Media Categories</a></li>
+                    <li><a href="#stored-metadata">Stored Metadata</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">System Architecture</a>
+                <ul>
+                    <li><a href="#architecture">Architecture Details</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Backend API</a>
+                <ul>
+                    <li><a href="#backend-api">Endpoints</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Frontend Features</a>
+                <ul>
+                    <li><a href="#frontend-features">GUI Features</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Interactive Demo</a>
+                <ul>
+                    <li><a href="#mock-interaction">Mock Interaction</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="search-container">
+            <input type="text" placeholder="Search...">
+            <div class="search-dropdown">
+                <a href="#category-book">Book</a>
+                <a href="#category-film">Film</a>
+                <a href="#category-magazine">Magazine</a>
+            </div>
+        </div>
+    </nav>
+
     <main>
         <section id="project-overview">
             <h2>Project Overview & Requirements</h2>
             <p>This software solution manages metadata for various media types, providing a persistent backend API and a user-friendly graphical interface (GUI).</p>
-            
-            <h3>Media Categories</h3>
+            <h3 id="media-categories">Media Categories</h3>
             <ul>
                 <li><strong>Book</strong></li>
                 <li><strong>Film</strong></li>
                 <li><strong>Magazine</strong></li>
             </ul>
-
-            <h3>Stored Metadata</h3>
+            <h3 id="stored-metadata">Stored Metadata</h3>
             <ol>
                 <li>Name (Title)</li>
                 <li>Publication date</li>
@@ -37,7 +80,7 @@
             <h2>System Architecture</h2>
             <p>The system uses a two-tier architecture:</p>
             <blockquote>
-                <p>The **Backend (Flask)** handles data persistence (JSON/Pickle) and API requests. The **Frontend (PyQt/PySide)** is a desktop GUI application that acts as the client, communicating with the backend via HTTP/JSON.</p>
+                <p>The <strong>Backend (Flask)</strong> handles data persistence (JSON/Pickle) and API requests. The <strong>Frontend (PyQt/PySide)</strong> is a desktop GUI application that acts as the client, communicating with the backend via HTTP/JSON.</p>
                 <cite>Concept Documentation (Task 1)</cite>
             </blockquote>
         </section>
@@ -45,7 +88,6 @@
         <section id="backend-api">
             <h2>Backend (Flask) HTTP Endpoints</h2>
             <p>The API provides the following endpoints for media management (CRUD operations):</p>
-            
             <table>
                 <thead>
                     <tr>
@@ -95,23 +137,20 @@
                 </tbody>
             </table>
         </section>
-        
+
         <section id="frontend-features">
             <h2>Frontend (GUI) Features</h2>
-            <p>The client application enables users to perform all required interactions:</p>
             <ul>
                 <li>Display the full list of media.</li>
                 <li>Filter media using a <strong>Category Dropdown</strong>.</li>
                 <li>Search media using an <strong>Exact Match Name Input</strong>.</li>
                 <li>Display detailed metadata upon item selection.</li>
-                <li>Dedicated interfaces for **Creating** and **Deleting** media items.</li>
+                <li>Dedicated interfaces for <strong>Creating</strong> and <strong>Deleting</strong> media items.</li>
             </ul>
         </section>
 
         <section id="mock-interaction">
             <h2>🔗 Interactive Demo Simulation (Static)</h2>
-            <p>This section simulates the core GUI functionality (List, Select, View Details) using pure HTML/CSS:</p>
-
             <div class="mock-layout-container">
                 <div class="mock-list-panel">
                     <h3>Media List (Click to View Details)</h3>
@@ -121,22 +160,21 @@
                         <li><a href="#detail-time">Time Magazine</a> (Magazine)</li>
                         <li><a href="#detail-default">Click Here to View Default Message</a></li>
                     </ul>
-                    
                     <h3 style="margin-top: 30px;">GUI Controls Mockup:</h3>
                     <form style="display: flex; flex-direction: column; gap: 10px;">
-                        <select id="category-filter" name="category" disabled>
+                        <select id="category-filter" name="category">
                             <option>All</option>
                             <option>Book</option>
+                            <option>Film</option>
+                            <option>Magazine</option>
                         </select>
-                        <input type="text" id="search-name" placeholder="Enter media title..." disabled>
-                        <button type="button" disabled>Search</button>
-                        <button type="button" disabled>Create New</button>
+                        <input type="text" id="search-name" placeholder="Enter media title...">
+                        <button type="button">Search</button>
+                        <button type="button">Create New</button>
                     </form>
                 </div>
-
                 <div class="mock-detail-panel">
                     <h3>Metadata Detail View</h3>
-                    
                     <div id="detail-martian" class="media-detail-block">
                         <h4>"The Martian" (Book)</h4>
                         <p><strong>Author:</strong> Andy Weir</p>
@@ -144,7 +182,6 @@
                         <p><strong>Category:</strong> Book</p>
                         <p><em>Simulates the detail panel being updated after selection.</em></p>
                     </div>
-
                     <div id="detail-dune" class="media-detail-block">
                         <h4>"Dune" (Film)</h4>
                         <p><strong>Author:</strong> Denis Villeneuve</p>
@@ -152,7 +189,6 @@
                         <p><strong>Category:</strong> Film</p>
                         <p><em>Simulates the detail panel being updated after selection.</em></p>
                     </div>
-                    
                     <div id="detail-time" class="media-detail-block">
                         <h4>"Time Magazine" (Magazine)</h4>
                         <p><strong>Author:</strong> Various</p>
@@ -160,7 +196,6 @@
                         <p><strong>Category:</strong> Magazine</p>
                         <p><em>Simulates the detail panel being updated after selection.</em></p>
                     </div>
-
                     <div id="detail-default" class="media-detail-block default-detail">
                         <p>👈 **Please click any media item in the list on the left to simulate loading its details.**</p>
                         <p>This interaction demonstrates the required functionality of the desktop GUI's selection and detail panel.</p>
@@ -168,8 +203,8 @@
                 </div>
             </div>
         </section>
-
     </main>
+
     <footer>
         <p>Code available on GitHub. &copy; 2025 Online Library Project</p>
     </footer>
