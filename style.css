@@ -113,7 +113,7 @@ tr:nth-child(even) {
     padding: 8px;
 }
 
-/* --- Navigation Bar & Dropdown --- */
+/* --- Navigation Bar & Animated Dropdown --- */
 nav {
     display: flex;
     justify-content: space-between;
@@ -150,8 +150,11 @@ nav {
     border-radius: 4px 4px 0 0;
 }
 
+/* Animated Dropdown */
 .dropdown {
-    display: none;
+    display: block;
+    max-height: 0;
+    overflow: hidden;
     position: absolute;
     top: 100%;
     left: 0;
@@ -161,17 +164,26 @@ nav {
     min-width: 180px;
     border-radius: 0 0 6px 6px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+    z-index: 1000;
+    transition: max-height 0.3s ease-out;
+}
+
+.nav-menu li:hover .dropdown {
+    max-height: 500px; /* Expand to show all items */
 }
 
 .dropdown li a {
     padding: 10px;
     font-weight: normal;
     white-space: nowrap;
+    display: block;
+    color: white;
+    transition: background-color 0.2s;
 }
 
-.nav-menu li:hover .dropdown {
-    display: block;
+.dropdown li a:hover {
+    background-color: #0056b3;
+    border-radius: 0 0 6px 6px;
 }
 
 /* Search Dropdown */
@@ -188,7 +200,9 @@ nav {
 }
 
 .search-dropdown {
-    display: none;
+    display: block;
+    max-height: 0;
+    overflow: hidden;
     position: absolute;
     top: 100%;
     left: 0;
@@ -198,6 +212,7 @@ nav {
     border-radius: 0 0 6px 6px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     z-index: 100;
+    transition: max-height 0.3s ease-out;
 }
 
 .search-dropdown li a {
@@ -212,7 +227,7 @@ nav {
 }
 
 .search-container:hover .search-dropdown {
-    display: block;
+    max-height: 500px;
 }
 
 /* --- Mock Interaction Panel --- */
