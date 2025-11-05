@@ -137,6 +137,18 @@ nav {
     position: relative;
 }
 
+/* Add dropdown arrow indicator */
+.nav-menu > li > a::after {
+    content: " ▼"; /* Downward arrow */
+    font-size: 0.7em;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.nav-menu li:hover > a::after {
+    transform: rotate(-180deg);
+}
+
 .nav-menu a {
     display: block;
     padding: 15px 10px;
@@ -199,6 +211,7 @@ nav {
     width: 180px;
 }
 
+/* Animated search dropdown */
 .search-dropdown {
     display: block;
     max-height: 0;
