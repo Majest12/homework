@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Library (Bookstore) Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>📚 Online Library (Bookstore) Project</h1>
-        <p>A Full-Stack Python Solution: Flask Backend + PyQt GUI Frontend</p>
+        <h1>📚 Online Library Management System</h1>
+        <p>A Robust, Full-Stack Python Solution: Flask Backend + PyQt GUI Frontend</p>
     </header>
 
-    <!-- Navigation Bar -->
     <nav>
         <ul class="nav-menu">
             <li><a href="#project-overview">Project</a>
@@ -35,7 +35,6 @@
         </ul>
         <div class="search-container">
             <input type="text" id="search-input" placeholder="Search media...">
-            <!-- Search results container -->
             <div class="search-results" id="search-results"></div>
         </div>
     </nav>
@@ -113,3 +112,71 @@
                     </tr>
                     <tr>
                         <td>6</td>
+                        <td>Update Metadata</td>
+                        <td>PUT</td>
+                        <td><code>/media/123</code></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Delete Media</td>
+                        <td>DELETE</td>
+                        <td><code>/media/123</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="frontend-features">
+            <h2>Frontend (PyQt/PySide) GUI Features</h2>
+            <p>The client application offers a seamless desktop experience for interacting with the backend API.</p>
+            <ul>
+                <li><strong>Data Visualization:</strong> Displaying media lists with key metadata.</li>
+                <li><strong>CRUD Forms:</strong> Dedicated forms for creating, editing, and deleting records.</li>
+                <li><strong>Interactive Search:</strong> Quick filtering and searching capabilities.</li>
+                <li>**Client-Server Communication:** Efficient handling of HTTP/JSON requests.</li>
+            </ul>
+        </section>
+
+        <section id="mock-interaction">
+            <h2>Interactive Demo (Mock Interaction)</h2>
+            <p>Demonstrates the communication flow between the Frontend Client and the Flask Backend.</p>
+            <div class="mock-layout-container">
+                <div class="mock-list-panel">
+                    <h3>Client View: Media List</h3>
+                    <ul>
+                        <li><a href="#detail-book1">Book: The Python Primer</a></li>
+                        <li><a href="#detail-film1">Film: Project Deployment</a></li>
+                        <li><a href="#detail-mag1">Magazine: Flask Insights Q3</a></li>
+                    </ul>
+                </div>
+                <div class="mock-detail-panel">
+                    <h3>Backend Response: Detail View</h3>
+                    <div id="detail-default" class="media-detail-block">
+                        <p>Click on a media item in the list to simulate the API call and view its metadata.</p>
+                    </div>
+                    <div id="detail-book1" class="media-detail-block">
+                        <h4>Book: The Python Primer</h4>
+                        <p><strong>Author:</strong> A. Developer</p>
+                        <p><strong>Published:</strong> 2024-01-15</p>
+                    </div>
+                    <div id="detail-film1" class="media-detail-block">
+                        <h4>Film: Project Deployment</h4>
+                        <p><strong>Director:</strong> B. Analyst</p>
+                        <p><strong>Published:</strong> 2023-11-01</p>
+                    </div>
+                    <div id="detail-mag1" class="media-detail-block">
+                        <h4>Magazine: Flask Insights Q3</h4>
+                        <p><strong>Author:</strong> C. Engineer</p>
+                        <p><strong>Published:</strong> 2024-07-01</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Online Library Project | Full-Stack Python Solution</p>
+    </footer>
+</body>
+</html>
