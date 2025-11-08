@@ -1,253 +1,190 @@
+# gui.py
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 import requests
-import json
 
-# --- Configuration ---
-API_BASE_URL = "http://127.0.0.1:5000"
-CATEGORIES = ["All", "Book", "Film", "Magazine"] # "All" is for the initial list
+BACKEND_URL = "http://127.0.0.1:5000"
+
 
 class LibraryGUI(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("Online Library GUI")
-        self.geometry("800x600")
-
-        # Configure requests (requires: pip install requests)
-        try:
-            requests.get(f"{API_BASE_URL}/media") # Test connection
-        except requests.exceptions.ConnectionError:
-            messagebox.showerror("Connection Error", 
-                                 f"Could not connect to the backend at {API_BASE_URL}.\n"
-                                 "Please ensure 'backend.py' is running.")
-            self.destroy()
-            return
-        
+        self.title("Online Library (Client)")
+        self.geometry("700x420")
         self.create_widgets()
-        self.load_media("All")
+        self.refresh_all()
 
     def create_widgets(self):
-        # --- Controls Frame (Top) ---
-        controls_frame = ttk.Frame(self, padding="10")
-        controls_frame.pack(fill='x')
+        top_frame = ttk.Frame(self)
+        top_frame.pack(fill=tk.X, padx=8, pady=6)
 
-        # 1. Category Dropdown
-        ttk.Label(controls_frame, text="Filter by Category:").pack(side='left', padx=(0, 5))
-        self.category_var = tk.StringVar(self)
-        self.category_var.set(CATEGORIES[0])
-        category_menu = ttk.OptionMenu(controls_frame, self.category_var, CATEGORIES[0], *CATEGORIES, command=self.on_category_select)
-        category_menu.pack(side='left', padx=(0, 20))
-        
-        # 3. Name Search Field
-        ttk.Label(controls_frame, text="Search Name (Exact):").pack(side='left', padx=(0, 5))
-        self.search_entry = ttk.Entry(controls_frame, width=20)
-        self.search_entry.pack(side='left', padx=(0, 5))
-        ttk.Button(controls_frame, text="Search", command=self.search_media).pack(side='left', padx=(0, 20))
+        ttk.Label(top_frame, text="Category:").pack(side=tk.LEFT)
+        self.category_var = tk.StringVar(value="All")
+        categories = ["All", "Book", "Film", "Magazine"]
+        self.category_menu = ttk.OptionMenu(top_frame, self.category_var, "All", *categories, command=self.on_category_change)
+        self.category_menu.pack(side=tk.LEFT, padx=6)
 
-        # 5. Create New Button
-        ttk.Button(controls_frame, text="➕ Create New Media", command=self.create_media).pack(side='right')
+        ttk.Label(top_frame, text="Search (exact name):").pack(side=tk.LEFT, padx=(12, 4))
+        self.search_entry = ttk.Entry(top_frame, width=30)
+        self.search_entry.pack(side=tk.LEFT)
+        ttk.Button(top_frame, text="Search", command=self.on_search).pack(side=tk.LEFT, padx=6)
+        ttk.Button(top_frame, text="Refresh", command=self.refresh_all).pack(side=tk.LEFT, padx=6)
 
-        # --- List Frame (Middle) ---
-        list_frame = ttk.Frame(self, padding="10")
-        list_frame.pack(fill='both', expand=True)
+        mid_frame = ttk.Frame(self)
+        mid_frame.pack(fill=tk.BOTH, expand=True, padx=8, pady=6)
 
-        self.media_listbox = tk.Listbox(list_frame, height=20, font=('TkDefaultFont', 10))
-        self.media_listbox.pack(side='left', fill='both', expand=True)
-        self.media_listbox.bind('<<ListboxSelect>>', self.on_media_select) # 4. Display metadata on click
+        # Listbox of media
+        left_frame = ttk.Frame(mid_frame)
+        left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        ttk.Label(left_frame, text="Media items:").pack(anchor=tk.W)
+        self.listbox = tk.Listbox(left_frame)
+        self.listbox.pack(fill=tk.BOTH, expand=True)
+        self.listbox.bind("<<ListboxSelect>>", self.on_select)
 
-        # Scrollbar
-        scrollbar = ttk.Scrollbar(list_frame, orient='vertical', command=self.media_listbox.yview)
-        scrollbar.pack(side='right', fill='y')
-        self.media_listbox.config(yscrollcommand=scrollbar.set)
+        right_frame = ttk.Frame(mid_frame, width=300)
+        right_frame.pack(side=tk.LEFT, fill=tk.Y, padx=(8,0))
+        ttk.Label(right_frame, text="Metadata:").pack(anchor=tk.W)
+        self.meta_text = tk.Text(right_frame, height=12, width=40)
+        self.meta_text.pack()
 
-        # --- Details Frame (Bottom) ---
-        details_frame = ttk.Frame(self, padding="10")
-        details_frame.pack(fill='x')
-        self.details_label = ttk.Label(details_frame, text="Select an item to view details.", justify='left', wraplength=780)
-        self.details_label.pack(fill='x')
+        btn_frame = ttk.Frame(right_frame)
+        btn_frame.pack(fill=tk.X, pady=(8,0))
+        ttk.Button(btn_frame, text="Create new", command=self.on_create).pack(side=tk.LEFT, padx=4)
+        ttk.Button(btn_frame, text="Delete selected", command=self.on_delete).pack(side=tk.LEFT, padx=4)
 
-        # 6. Delete Button (Placed next to details for easy access after selection)
-        ttk.Button(details_frame, text="🗑️ Delete Selected Media", command=self.delete_media).pack(pady=5)
-        
-        self.current_media_data = []
+        # status
+        self.status_var = tk.StringVar(value="Ready")
+        ttk.Label(self, textvariable=self.status_var).pack(fill=tk.X, padx=8, pady=(4,8))
 
-    # --- API Communication & Frontend Logic ---
+        # internal mapping id -> item
+        self.items_map = []
 
-    def load_media(self, category):
-        """1 & 2. Loads and displays media from the backend."""
-        self.media_listbox.delete(0, tk.END)
-        self.details_label.config(text="Select an item to view details.")
-        self.current_media_data = []
+    def set_status(self, txt):
+        self.status_var.set(txt)
 
+    def refresh_all(self):
+        self.set_status("Loading all media...")
         try:
-            if category == "All":
-                response = requests.get(f"{API_BASE_URL}/media")
-            else:
-                response = requests.get(f"{API_BASE_URL}/media/category/{category}")
+            r = requests.get(f"{BACKEND_URL}/media")
+            r.raise_for_status()
+            items = r.json()
+            self.populate_list(items)
+            self.set_status(f"Loaded {len(items)} items.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Could not load media: {e}")
+            self.set_status("Error loading media")
 
-            response.raise_for_status() # Raise exception for bad status codes
-            
-            self.current_media_data = response.json()
-            if not self.current_media_data:
-                self.media_listbox.insert(tk.END, f"--- No media found in category: {category} ---")
-                return
+    def populate_list(self, items):
+        self.items_map = items
+        self.listbox.delete(0, tk.END)
+        for it in items:
+            self.listbox.insert(tk.END, f"{it['name']} ({it['category']})")
 
-            for item in self.current_media_data:
-                display_text = f"[{item['category']}] ID: {item['id']} | Name: {item['name']} | Author: {item['author']}"
-                self.media_listbox.insert(tk.END, display_text)
+    def on_category_change(self, _value=None):
+        cat = self.category_var.get()
+        if cat == "All":
+            self.refresh_all()
+            return
+        self.set_status(f"Loading category {cat}...")
+        try:
+            r = requests.get(f"{BACKEND_URL}/media/category/{cat}")
+            r.raise_for_status()
+            items = r.json()
+            self.populate_list(items)
+            self.set_status(f"Loaded {len(items)} items in {cat}.")
+        except Exception as e:
+            messagebox.showerror("Error", f"Could not load category: {e}")
+            self.set_status("Error loading category")
 
-        except requests.exceptions.RequestException as e:
-            messagebox.showerror("API Error", f"Could not load media: {e}")
-
-    def on_category_select(self, category):
-        """2. Event handler for category selection."""
-        if category:
-            self.load_media(category)
-
-    def search_media(self):
-        """3. Searches for media by name (exact match)."""
+    def on_search(self):
         name = self.search_entry.get().strip()
         if not name:
-            messagebox.showwarning("Input Required", "Please enter a name to search.")
+            messagebox.showinfo("Search", "Enter a name to search for (exact match).")
             return
-
-        self.media_listbox.delete(0, tk.END)
-        self.details_label.config(text="Select an item to view details.")
-        self.current_media_data = []
-        self.category_var.set("Search Results") # Change dropdown to reflect search
-        
+        self.set_status(f"Searching for '{name}'...")
         try:
-            response = requests.get(f"{API_BASE_URL}/media/search?name={name}")
-            
-            if response.status_code == 404:
-                self.media_listbox.insert(tk.END, f"--- No exact match found for '{name}' ---")
+            r = requests.get(f"{BACKEND_URL}/media/search", params={"name": name})
+            if r.status_code == 404:
+                messagebox.showinfo("Not found", "No media found with that exact name.")
+                self.set_status("Search: no results")
                 return
-            
-            response.raise_for_status()
-            
-            self.current_media_data = response.json()
-            for item in self.current_media_data:
-                display_text = f"[{item['category']}] ID: {item['id']} | Name: {item['name']} | Author: {item['author']}"
-                self.media_listbox.insert(tk.END, display_text)
+            r.raise_for_status()
+            item = r.json()
+            self.populate_list([item])
+            self.set_status("Search completed")
+        except Exception as e:
+            messagebox.showerror("Error", f"Search failed: {e}")
+            self.set_status("Search error")
 
-        except requests.exceptions.RequestException as e:
-            messagebox.showerror("API Error", f"Could not search media: {e}")
+    def on_select(self, evt=None):
+        sel = self.listbox.curselection()
+        if not sel:
+            return
+        idx = sel[0]
+        item = self.items_map[idx]
+        self.show_metadata(item)
 
-    def on_media_select(self, event):
-        """4. Displays the full metadata of the selected item."""
-        try:
-            selection = self.media_listbox.curselection()
-            if not selection:
-                return
+    def show_metadata(self, item):
+        self.meta_text.delete("1.0", tk.END)
+        text = (
+            f"ID: {item['id']}\n"
+            f"Name: {item['name']}\n"
+            f"Author: {item['author']}\n"
+            f"Publication date: {item['publication_date']}\n"
+            f"Category: {item['category']}\n"
+        )
+        self.meta_text.insert(tk.END, text)
 
-            # Get the selected media item's data from the list we loaded
-            selected_item_data = self.current_media_data[selection[0]]
-            
-            # Fetch full metadata from the API (Endpoint 4)
-            response = requests.get(f"{API_BASE_URL}/media/{selected_item_data['id']}")
-            response.raise_for_status()
-            metadata = response.json()
-            
-            details_text = (
-                f"ID: {metadata['id']}\n"
-                f"Name: {metadata['name']}\n"
-                f"Category: {metadata['category']}\n"
-                f"Author: {metadata['author']}\n"
-                f"Publication Date: {metadata['publication_date']}"
-            )
-            self.details_label.config(text=details_text)
-
-        except (IndexError, requests.exceptions.RequestException) as e:
-            self.details_label.config(text=f"Error displaying details: {e}")
-
-    def create_media(self):
-        """5. Opens a dialog to create a new media item."""
-        new_media_data = CreateMediaDialog(self).result
-        if new_media_data:
-            try:
-                # API Endpoint 5 (POST)
-                response = requests.post(f"{API_BASE_URL}/media", json=new_media_data)
-                response.raise_for_status()
-                messagebox.showinfo("Success", f"Media '{new_media_data['name']}' created successfully!")
-                self.load_media(self.category_var.get()) # Reload the current view
-
-            except requests.exceptions.RequestException as e:
-                error_message = f"Failed to create media. {e}"
-                try:
-                    error_data = response.json()
-                    error_message = error_data.get('message', error_message)
-                except:
-                    pass
-                messagebox.showerror("Creation Error", error_message)
-
-    def delete_media(self):
-        """6. Deletes the currently selected media item."""
-        try:
-            selection = self.media_listbox.curselection()
-            if not selection:
-                messagebox.showwarning("No Selection", "Please select a media item to delete.")
-                return
-
-            selected_item_data = self.current_media_data[selection[0]]
-            media_id = selected_item_data['id']
-            media_name = selected_item_data['name']
-
-            if messagebox.askyesno("Confirm Delete", f"Are you sure you want to delete '{media_name}' (ID: {media_id})?"):
-                # API Endpoint 6 (DELETE)
-                response = requests.delete(f"{API_BASE_URL}/media/{media_id}")
-                response.raise_for_status()
-                
-                messagebox.showinfo("Success", f"Media '{media_name}' deleted.")
-                self.load_media(self.category_var.get()) # Reload the current view
-                
-        except (IndexError, requests.exceptions.RequestException) as e:
-            messagebox.showerror("Deletion Error", f"Failed to delete media: {e}")
-
-
-class CreateMediaDialog(simpledialog.Dialog):
-    """Custom dialog for creating a new media item."""
-    def __init__(self, parent):
-        self.result = None
-        super().__init__(parent, title="Create New Media")
-
-    def body(self, master):
-        self.entries = {}
-        fields = ['Name', 'Publication Date (YYYY-MM-DD)', 'Author']
-        
-        for i, field in enumerate(fields):
-            ttk.Label(master, text=f"{field}:").grid(row=i, column=0, sticky='w')
-            entry = ttk.Entry(master, width=30)
-            entry.grid(row=i, column=1, padx=5, pady=5)
-            self.entries[field.split(' ')[0].lower()] = entry
-        
-        # Category Dropdown
-        ttk.Label(master, text="Category:").grid(row=len(fields), column=0, sticky='w')
-        self.category_var = tk.StringVar(master)
-        self.category_var.set(CATEGORIES[1]) # Default to Book
-        category_menu = ttk.OptionMenu(master, self.category_var, CATEGORIES[1], *CATEGORIES[1:])
-        category_menu.grid(row=len(fields), column=1, padx=5, pady=5, sticky='ew')
-
-        return self.entries['name'] # initial focus
-
-    def apply(self):
-        # Gather data from fields
-        data = {
-            'name': self.entries['name'].get().strip(),
-            'publication_date': self.entries['publication'].get().strip(),
-            'author': self.entries['author'].get().strip(),
-            'category': self.category_var.get()
+    def on_create(self):
+        # Simple dialog sequence to collect fields
+        name = simpledialog.askstring("Create", "Name:")
+        if not name:
+            return
+        author = simpledialog.askstring("Create", "Author:")
+        if author is None:
+            return
+        pub_date = simpledialog.askstring("Create", "Publication date (e.g., 2020-01-01):")
+        if pub_date is None:
+            return
+        category = simpledialog.askstring("Create", "Category (Book/Film/Magazine):")
+        if category is None:
+            return
+        payload = {
+            "name": name,
+            "author": author,
+            "publication_date": pub_date,
+            "category": category,
         }
-        
-        # Basic validation
-        if not all(data.values()):
-            messagebox.showerror("Input Error", "All fields are required.")
-            self.initial_focus = self.entries['name']
-            return
+        try:
+            r = requests.post(f"{BACKEND_URL}/media", json=payload)
+            if r.status_code == 201:
+                messagebox.showinfo("Success", "Media created.")
+                self.refresh_all()
+            else:
+                messagebox.showerror("Failed", f"Create failed: {r.status_code} {r.text}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Create error: {e}")
 
-        self.result = data
+    def on_delete(self):
+        sel = self.listbox.curselection()
+        if not sel:
+            messagebox.showinfo("Delete", "Select an item first.")
+            return
+        idx = sel[0]
+        item = self.items_map[idx]
+        if not messagebox.askyesno("Confirm delete", f"Delete '{item['name']}'?"):
+            return
+        try:
+            r = requests.delete(f"{BACKEND_URL}/media/{item['id']}")
+            if r.status_code == 200:
+                messagebox.showinfo("Deleted", "Item deleted.")
+                self.refresh_all()
+            else:
+                messagebox.showerror("Error", f"Delete failed: {r.status_code} {r.text}")
+        except Exception as e:
+            messagebox.showerror("Error", f"Delete error: {e}")
 
 
 if __name__ == "__main__":
-    # Ensure you have the 'requests' library installed: pip install requests
     app = LibraryGUI()
     app.mainloop()
