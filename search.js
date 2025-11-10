@@ -1,3 +1,6 @@
+// Start of IIFE
+(function() {
+
 // Local images in the same directory
 const mediaImages = [
     { name: "The Martian", src: "martian.jpg", link: "#detail-martian" },
@@ -35,3 +38,5 @@ searchInput.addEventListener("input", () => {
 
     searchResults.style.display = "flex";
 });
+
+})(); // End of IIFE
