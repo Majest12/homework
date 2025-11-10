@@ -20,11 +20,17 @@ const mediaDatabase = [
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
 const resultsContainer = document.getElementById('results-container');
+const searchResults = document.getElementById("search-results"); // Added reference to the image dropdown
 
 // 3. Search Logic Function
 function performSearch() {
     const searchTerm = searchInput.value.trim().toLowerCase();
     resultsContainer.innerHTML = ''; 
+
+    // *** CRITICAL FIX: Hide the image dropdown immediately when the button search runs ***
+    if (searchResults) { 
+        searchResults.style.display = "none";
+    }
 
     if (searchTerm === "") {
         resultsContainer.innerHTML = '<p style="color: #1a73e8; font-style: italic;">Please enter a title, author, or keyword to search.</p>';
@@ -72,11 +78,10 @@ function performSearch() {
     document.getElementById('search-results-section').scrollIntoView({ behavior: 'smooth' });
 }
 
-// 6. Event Listeners (Only attached to the button and Enter key)
+// 6. Event Listeners
 searchButton.addEventListener('click', performSearch);
 searchInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-        // Prevent the default form submission behavior if applicable
         e.preventDefault(); 
         performSearch();
     }
