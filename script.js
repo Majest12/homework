@@ -1,4 +1,4 @@
-// 1. UPDATED Mock Backend Data with your requested media list
+// 1. UPDATED Mock Backend Data
 const mediaDatabase = [
     // Film / TV Series
     {
@@ -115,13 +115,12 @@ function performSearch() {
         media.author.toLowerCase().includes(searchTerm)
     );
 
-    // 4. Render Results - ***MODIFIED TO INCLUDE ALL DETAILS***
-    // 4. Render Results - ***CRITICAL: Check this section in your script.js***
+    // 4. Render Results - THIS IS THE CRITICAL SECTION
     if (foundMedia.length > 0) {
         let htmlContent = `<h3 style="color: #343a40;">✅ Found ${foundMedia.length} Item(s) matching "${searchInput.value}"</h3>`;
 
         foundMedia.forEach(media => {
-            // This is the HTML block that displays the details
+            // Check that media.author, media.date, media.type, etc. are correctly used here.
             htmlContent += `
                 <div class="media-detail-block" style="display: block; border: 1px solid #1a73e8; padding: 20px; margin-bottom: 25px; border-radius: 8px; background: #e6f0ff; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
                     <h4 style="color: #1a73e8; margin-top: 0; border-bottom: 1px dashed #a0c3ff; padding-bottom: 5px;">${media.title}</h4>
@@ -137,8 +136,6 @@ function performSearch() {
         });
 
         resultsContainer.innerHTML = htmlContent;
-    } 
-    // ... (rest of the else block for "Not Found" message)
     } else {
         // 5. Not Found Message
         resultsContainer.innerHTML = `
