@@ -126,11 +126,10 @@ class LibraryApp(QMainWindow):
 
     def load_media(self, media_data=None):
         """Loads data into the table, handling potential errors.
-           FIX: Clears selection and details when loading new data."""
+           FIX: Clears selection when loading new data."""
         
-        # FIX 1: Clear previous selection and detail panel before loading new data
+        # FIX 1: Clear previous selection when loading a new list
         self.media_table.clearSelection() 
-        self.display_selected_details() 
         
         self.delete_button.setEnabled(False)
         
@@ -165,7 +164,7 @@ class LibraryApp(QMainWindow):
         if category == "All":
             self.load_media()
         else:
-            # FIX: load_media handles clearing details, just ensure new data is retrieved
+            # FIX: load_media handles clearing selection, just ensure new data is retrieved
             media_data = self.api_client.get_media_by_category(category)
             if isinstance(media_data, dict) and "error" in media_data:
                 QMessageBox.critical(self, "API Error", media_data["error"])
@@ -174,12 +173,16 @@ class LibraryApp(QMainWindow):
 
     def search_media(self):
         """Called when Search button is clicked (Endpoint 3).
-           FIX: Forces selection of the first result to update details panel."""
+           FIX: Manually clears details and forces selection of the first result."""
         name = self.search_input.text().strip()
         if not name:
             QMessageBox.warning(self, "Input Required", "Please enter the exact name of the medium to search.")
             return
 
+        # FIX 2: Manually clear the details panel labels (eliminates old data ghosting)
+        for label in self.detail_labels.values():
+            label.setText("N/A")
+        
         media_data = self.api_client.search_media_by_name(name)
         
         if isinstance(media_data, dict) and "error" in media_data:
@@ -187,7 +190,7 @@ class LibraryApp(QMainWindow):
         else:
             self.load_media(media_data)
             
-            # FIX 4: If results were found, select the first row to trigger detail display
+            # FIX 3: If results were found, select the first row to trigger detail display
             if media_data and len(media_data) > 0:
                 self.media_table.selectRow(0)
             else:
@@ -220,7 +223,6 @@ class LibraryApp(QMainWindow):
         # Update detail labels
         for field in METADATA_FIELDS:
             # Ensure keys like "Publication date" are handled correctly
-            display_key = field.replace(' ', '_') if field != 'id' else field
             self.detail_labels[field].setText(str(details.get(field, "N/A")))
             
         self.delete_button.setEnabled(True)
