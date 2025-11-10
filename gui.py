@@ -70,6 +70,10 @@ class LibraryGUI(tk.Tk):
             items = r.json()
             self.populate_list(items)
             self.set_status(f"Loaded {len(items)} items.")
+            
+            # FIX 1a: Clear metadata panel on full refresh
+            self.meta_text.delete("1.0", tk.END) 
+            
         except Exception as e:
             messagebox.showerror("Error", f"Could not load media: {e}")
             self.set_status("Error loading media")
@@ -92,6 +96,10 @@ class LibraryGUI(tk.Tk):
             items = r.json()
             self.populate_list(items)
             self.set_status(f"Loaded {len(items)} items in {cat}.")
+            
+            # FIX 1b: Clear metadata panel on category change
+            self.meta_text.delete("1.0", tk.END)
+            
         except Exception as e:
             messagebox.showerror("Error", f"Could not load category: {e}")
             self.set_status("Error loading category")
@@ -101,17 +109,32 @@ class LibraryGUI(tk.Tk):
         if not name:
             messagebox.showinfo("Search", "Enter a name to search for (exact match).")
             return
+        
         self.set_status(f"Searching for '{name}'...")
         try:
             r = requests.get(f"{BACKEND_URL}/media/search", params={"name": name})
+            
+            # 🚨 Clear metadata panel before showing result or error
+            self.meta_text.delete("1.0", tk.END) 
+            
             if r.status_code == 404:
                 messagebox.showinfo("Not found", "No media found with that exact name.")
                 self.set_status("Search: no results")
                 return
+            
             r.raise_for_status()
             item = r.json()
             self.populate_list([item])
             self.set_status("Search completed")
+            
+            # FIX 2: Manually select and show the metadata for the single found item
+            if self.items_map:
+                # Select the item in the listbox (optional, but good UX)
+                self.listbox.selection_clear(0, tk.END)
+                self.listbox.selection_set(0)
+                # Show the metadata for the first (and only) item found
+                self.show_metadata(self.items_map[0])
+                
         except Exception as e:
             messagebox.showerror("Error", f"Search failed: {e}")
             self.set_status("Search error")
@@ -119,13 +142,16 @@ class LibraryGUI(tk.Tk):
     def on_select(self, evt=None):
         sel = self.listbox.curselection()
         if not sel:
+            # FIX 3: Clear panel if selection is removed (e.g., when populating a new list)
+            self.meta_text.delete("1.0", tk.END) 
             return
         idx = sel[0]
         item = self.items_map[idx]
         self.show_metadata(item)
 
     def show_metadata(self, item):
-        self.meta_text.delete("1.0", tk.END)
+        # Already clears the panel, so no need to add here again.
+        self.meta_text.delete("1.0", tk.END) 
         text = (
             f"ID: {item['id']}\n"
             f"Name: {item['name']}\n"
@@ -136,7 +162,7 @@ class LibraryGUI(tk.Tk):
         self.meta_text.insert(tk.END, text)
 
     def on_create(self):
-        # Simple dialog sequence to collect fields
+        # ... (on_create logic remains the same) ...
         name = simpledialog.askstring("Create", "Name:")
         if not name:
             return
@@ -166,6 +192,7 @@ class LibraryGUI(tk.Tk):
             messagebox.showerror("Error", f"Create error: {e}")
 
     def on_delete(self):
+        # ... (on_delete logic remains the same) ...
         sel = self.listbox.curselection()
         if not sel:
             messagebox.showinfo("Delete", "Select an item first.")
