@@ -19,5 +19,61 @@
         "Publication date": "2023",
         "Author": "Various",
         "Category": "Magazine"
+    },
+    "4": {
+        "id": "4",
+        "Name": "Designated Survivor",
+        "Publication date": "2016-09-21",
+        "Author": "David Guggenheim",
+        "Category": "Film"
+    },
+    "5": {
+        "id": "5",
+        "Name": "The Blacklist",
+        "Publication date": "2013-09-23",
+        "Author": "Jon Bokenkamp",
+        "Category": "Film"
+    },
+    "6": {
+        "id": "6",
+        "Name": "You",
+        "Publication date": "2018-09-09",
+        "Author": "Greg Berlanti & Sera Gamble",
+        "Category": "Film"
+    },
+    "7": {
+        "id": "7",
+        "Name": "Dynasty",
+        "Publication date": "2017-10-11",
+        "Author": "Sallie Patrick, Josh Schwartz, Stephanie Savage",
+        "Category": "Film"
+    },
+    "8": {
+        "id": "8",
+        "Name": "Reign",
+        "Publication date": "2013-10-17",
+        "Author": "Laurie McCarthy & Stephanie SenGupta",
+        "Category": "Film"
+    },
+    "9": {
+        "id": "9",
+        "Name": "Fahrenheit 451",
+        "Publication date": "1953-10-19",
+        "Author": "Ray Bradbury",
+        "Category": "Book"
+    },
+    "10": {
+        "id": "10",
+        "Name": "Pride and Prejudice",
+        "Publication date": "1813-01-28",
+        "Author": "Jane Austen",
+        "Category": "Book"
+    },
+    "11": {
+        "id": "11",
+        "Name": "To Kill a Mockingbird",
+        "Publication date": "1960-07-11",
+        "Author": "Harper Lee",
+        "Category": "Book"
     }
 }

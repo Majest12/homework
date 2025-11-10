@@ -130,7 +130,7 @@ nav {
 .dropdown li a:hover { background:#6c757d; border-radius:0 0 6px 6px;}
 
 /* Search - MINOR ADJUSTMENT */
-.search-container { position:relative;}
+.search-container { position:relative; display: flex; align-items: center;} /* Added display: flex for button alignment */
 #search-input { 
     padding:10px 15px; 
     border-radius:20px; /* Pill shape for a modern look */
@@ -138,7 +138,7 @@ nav {
     outline:none; 
     width:200px;
 }
-.search-results { display:none; position:absolute; top:100%; left:0; width:300px; max-height:250px; overflow-y:auto; background:white; border:1px solid #ddd; border-radius:0 0 6px 6px; box-shadow:0 2px 5px rgba(0,0,0,0.2); z-index:200; padding:10px; display:flex; flex-wrap:wrap; gap:10px;}
+.search-results { display:none; position:absolute; top:100%; left:0; width:300px; max-height:250px; overflow-y:auto; background:white; border:1px solid #ddd; border-radius:0 0 6px 6px; box-shadow:0 2px 5px rgba(0,0,0,0.2); z-index:200; padding:10px; flex-wrap:wrap; gap:10px;}
 .search-results img { width:80px; height:80px; object-fit:cover; border-radius:4px; cursor:pointer; transition:transform 0.2s;}
 .search-results img:hover { transform:scale(1.05); }
 

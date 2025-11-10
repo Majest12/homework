@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Library (Bookstore) Project</title>
+    <title>Dynamic Media Search Library</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css"> </head>
 <body>
     <header>
         <h1>📚 Online Library Management System</h1>
@@ -32,9 +31,10 @@
                     <li><a href="#mock-interaction">Interactive Demo</a></li>
                 </ul>
             </li>
-        </ul>
+            <li><a href="#search-results-section">Search</a></li> </ul>
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search media...">
+            <input type="text" id="search-input" placeholder="Search Title/Author..." aria-label="Search media">
+            <button id="search-button" style="padding: 10px 15px; margin-left: 10px; border-radius: 20px; border: none; background: #1a73e8; color: white; cursor: pointer; font-weight: 500;">🔍 Search</button>
             <div class="search-results" id="search-results"></div>
         </div>
     </nav>
@@ -173,10 +173,121 @@
             </div>
         </section>
 
+        <section id="search-results-section">
+            <h2>🔍 Media Search Results</h2>
+            <p>Enter a title, author, or keyword in the search bar above and click 'Search' to view results.</p>
+            
+            <div id="results-container">
+                </div>
+        </section>
+
     </main>
 
     <footer>
         <p>&copy; 2025 Online Library Project | Full-Stack Python Solution</p>
     </footer>
+
+    <script>
+        // 1. Mock Backend Data (simulating the media database)
+        const mediaDatabase = [
+            {
+                type: "Book",
+                title: "The Python Primer",
+                author: "A. Developer",
+                date: "2024-01-15",
+                category: "Book",
+                backend_id: "B-2024-001"
+            },
+            {
+                type: "Film",
+                title: "Project Deployment",
+                author: "B. Analyst (Director)",
+                date: "2023-11-01",
+                category: "Film",
+                backend_id: "F-2023-002"
+            },
+            {
+                type: "Magazine",
+                title: "Flask Insights Q3",
+                author: "C. Engineer",
+                date: "2024-07-01",
+                category: "Magazine",
+                backend_id: "M-2024-003"
+            },
+            {
+                type: "Book",
+                title: "Advanced Data Structures",
+                author: "Dr. K. Smith",
+                date: "2022-05-20",
+                category: "Book",
+                backend_id: "B-2022-004"
+            }
+            // Add more media items here...
+        ];
+
+        // 2. DOM Element References
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const resultsContainer = document.getElementById('results-container');
+
+        // 3. Search Logic Function
+        function performSearch() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            if (searchTerm === "") {
+                resultsContainer.innerHTML = '<p style="color: #1a73e8; font-style: italic;">Please enter a title, author, or keyword to search.</p>';
+                document.getElementById('search-results-section').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            // Filter the database: Search by title OR author
+            const foundMedia = mediaDatabase.filter(media => 
+                media.title.toLowerCase().includes(searchTerm) || 
+                media.author.toLowerCase().includes(searchTerm)
+            );
+
+            // 4. Render Results
+            if (foundMedia.length > 0) {
+                let htmlContent = `<h3 style="color: #343a40;">✅ Found ${foundMedia.length} Item(s) matching "${searchInput.value}"</h3>`;
+                
+                foundMedia.forEach(media => {
+                    htmlContent += `
+                        <div class="media-detail-block" style="display: block; border: 1px solid #1a73e8; padding: 20px; margin-bottom: 25px; border-radius: 8px; background: #e6f0ff; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                            <h4 style="color: #1a73e8; margin-top: 0; border-bottom: 1px dashed #a0c3ff; padding-bottom: 5px;">${media.title} <span style="font-weight: 400; color: #555;">(${media.type})</span></h4>
+                            <p><strong>Author/Creator:</strong> ${media.author}</p>
+                            <p><strong>Publication Date:</strong> ${media.date}</p>
+                            <p><strong>Category:</strong> ${media.category}</p>
+                            <p style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #cceeff;">
+                                <strong>Backend Detail (ID):</strong> <code style="background: #f0f8ff; padding: 4px 8px; border-radius: 4px; color: #c0392b;">${media.backend_id}</code>
+                            </p>
+                        </div>
+                    `;
+                });
+                
+                resultsContainer.innerHTML = htmlContent;
+            } else {
+                // 5. Not Found Message (Styled for prominence)
+                resultsContainer.innerHTML = `
+                    <div style="padding: 30px; border: 2px dashed #e74c3c; border-radius: 8px; background: #fdf2f2; color: #c0392b; text-align: center;">
+                        <h3>❌ Media Not Found / Item Not Available</h3>
+                        <p>No item matching **"${searchInput.value}"** was found in the library database (Books, Films, or Magazines).</p>
+                        <p style="font-size: 0.9em; margin-top: 15px;">Please check your spelling or try a different keyword.</p>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('search-results-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 6. Event Listeners
+        searchButton.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+    </script>
 </body>
 </html>
