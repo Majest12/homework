@@ -1,96 +1,19 @@
 // 1. UPDATED Mock Backend Data
 const mediaDatabase = [
     // Film / TV Series
-    {
-        type: "Film / TV Series",
-        title: "You",
-        author: "Greg Berlanti & Sera Gamble",
-        date: "2018",
-        category: "TV Series",
-        backend_id: "TVS-2018-005"
-    },
-    {
-        type: "Film / TV Series",
-        title: "Reign",
-        author: "Laurie McCarthy & Stephanie SenGupta",
-        date: "2013",
-        category: "TV Series",
-        backend_id: "TVS-2013-006"
-    },
-    {
-        type: "Film / TV Series",
-        title: "Dynasty",
-        author: "Richard & Esther Shapiro (original); Reboot by Sallie Patrick, Josh Schwartz & Stephanie Savage",
-        date: "1981 / 2017",
-        category: "TV Series",
-        backend_id: "TVS-2017-007"
-    },
-    {
-        type: "Film / TV Series",
-        title: "The Blacklist",
-        author: "Jon Bokenkamp",
-        date: "2013",
-        category: "TV Series",
-        backend_id: "TVS-2013-008"
-    },
-    {
-        type: "Film / TV Series",
-        title: "Designated Survivor",
-        author: "David Guggenheim",
-        date: "2016",
-        category: "TV Series",
-        backend_id: "TVS-2016-009"
-    },
+    { type: "Film / TV Series", title: "You", author: "Greg Berlanti & Sera Gamble", date: "2018", category: "TV Series", backend_id: "TVS-2018-005" },
+    { type: "Film / TV Series", title: "Reign", author: "Laurie McCarthy & Stephanie SenGupta", date: "2013", category: "TV Series", backend_id: "TVS-2013-006" },
+    { type: "Film / TV Series", title: "Dynasty", author: "Richard & Esther Shapiro (original); Reboot by Sallie Patrick, Josh Schwartz & Stephanie Savage", date: "1981 / 2017", category: "TV Series", backend_id: "TVS-2017-007" },
+    { type: "Film / TV Series", title: "The Blacklist", author: "Jon Bokenkamp", date: "2013", category: "TV Series", backend_id: "TVS-2013-008" },
+    { type: "Film / TV Series", title: "Designated Survivor", author: "David Guggenheim", date: "2016", category: "TV Series", backend_id: "TVS-2016-009" },
     // Books
-    {
-        type: "Book",
-        title: "To Kill a Mockingbird",
-        author: "Harper Lee",
-        date: "1960",
-        category: "Book",
-        backend_id: "B-1960-010"
-    },
-    {
-        type: "Book",
-        title: "Pride and Prejudice",
-        author: "Jane Austen",
-        date: "1813",
-        category: "Book",
-        backend_id: "B-1813-011"
-    },
-    {
-        type: "Book",
-        title: "Fahrenheit 451",
-        author: "Ray Bradbury",
-        date: "1953",
-        category: "Book",
-        backend_id: "B-1953-012"
-    },
-    {
-        type: "Book",
-        title: "Dune",
-        author: "Frank Herbert",
-        date: "1965",
-        category: "Book",
-        backend_id: "B-1965-013"
-    },
-    {
-        type: "Book",
-        title: "The Martian",
-        author: "Andy Weir",
-        date: "2011",
-        category: "Book",
-        backend_id: "B-2011-014"
-    },
+    { type: "Book", title: "To Kill a Mockingbird", author: "Harper Lee", date: "1960", category: "Book", backend_id: "B-1960-010" },
+    { type: "Book", title: "Pride and Prejudice", author: "Jane Austen", date: "1813", category: "Book", backend_id: "B-1813-011" },
+    { type: "Book", title: "Fahrenheit 451", author: "Ray Bradbury", date: "1953", category: "Book", backend_id: "B-1953-012" },
+    { type: "Book", title: "Dune", author: "Frank Herbert", date: "1965", category: "Book", backend_id: "B-1965-013" },
+    { type: "Book", title: "The Martian", author: "Andy Weir", date: "2011", category: "Book", backend_id: "B-2011-014" },
     // Journal / Magazine
-    {
-        type: "Journal / Magazine",
-        title: "Time Magazine",
-        author: "Briton Hadden & Henry Luce",
-        date: "1923 (Founding Year)",
-        category: "Journal",
-        backend_id: "J-1923-015"
-    }
+    { type: "Journal / Magazine", title: "Time Magazine", author: "Briton Hadden & Henry Luce", date: "1923 (Founding Year)", category: "Journal", backend_id: "J-1923-015" }
 ];
 
 // 2. DOM Element References
@@ -115,12 +38,11 @@ function performSearch() {
         media.author.toLowerCase().includes(searchTerm)
     );
 
-    // 4. Render Results - THIS IS THE CRITICAL SECTION
+    // 4. Render Results (This section generates the HTML details)
     if (foundMedia.length > 0) {
         let htmlContent = `<h3 style="color: #343a40;">✅ Found ${foundMedia.length} Item(s) matching "${searchInput.value}"</h3>`;
 
         foundMedia.forEach(media => {
-            // Check that media.author, media.date, media.type, etc. are correctly used here.
             htmlContent += `
                 <div class="media-detail-block" style="display: block; border: 1px solid #1a73e8; padding: 20px; margin-bottom: 25px; border-radius: 8px; background: #e6f0ff; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
                     <h4 style="color: #1a73e8; margin-top: 0; border-bottom: 1px dashed #a0c3ff; padding-bottom: 5px;">${media.title}</h4>
@@ -150,10 +72,12 @@ function performSearch() {
     document.getElementById('search-results-section').scrollIntoView({ behavior: 'smooth' });
 }
 
-// 6. Event Listeners
+// 6. Event Listeners (Only attached to the button and Enter key)
 searchButton.addEventListener('click', performSearch);
 searchInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
+        // Prevent the default form submission behavior if applicable
+        e.preventDefault(); 
         performSearch();
     }
 });
