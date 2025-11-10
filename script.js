@@ -115,7 +115,7 @@ function performSearch() {
         media.author.toLowerCase().includes(searchTerm)
     );
 
-    // 4. Render Results
+    // 4. Render Results - ***MODIFIED TO INCLUDE ALL DETAILS***
     if (foundMedia.length > 0) {
         let htmlContent = `<h3 style="color: #343a40;">✅ Found ${foundMedia.length} Item(s) matching "${searchInput.value}"</h3>`;
 
