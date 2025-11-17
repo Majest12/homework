@@ -15,33 +15,16 @@
 
     <nav>
         <ul class="nav-menu">
-            <!-- Project Dropdown -->
             <li>
-                <a href="#" class="dropbtn">Project ▼</a>
-                <ul class="dropdown">
-                    <li><a href="#" data-target="project-overview">Overview</a></li>
-                    <li><a href="#" data-target="architecture-back-overview">Architecture (Summary)</a></li>
-                </ul>
+                <a href="#project-overview">Project</a>
             </li>
 
-            <!-- Backend Dropdown -->
             <li>
-                <a href="#" class="dropbtn">Backend ▼</a>
-                <ul class="dropdown">
-                    <li><a href="#" data-target="api-list">API Endpoints (List)</a></li>
-                    <li><a href="#" data-target="api-crud">API Endpoints (Search / CRUD)</a></li>
-                </ul>
+                <a href="#backend-api">Backend</a>
             </li>
 
-            <!-- Frontend Dropdown -->
             <li>
-                <a href="#" class="dropbtn">Frontend ▼</a>
-                <ul class="dropdown">
-                    <li><a href="#" data-target="gui-visual">GUI Features (Visualization)</a></li>
-                    <li><a href="#" data-target="gui-crud">GUI Features (CRUD)</a></li>
-                    <li><a href="#" data-target="mock-client">Interactive Demo (Client)</a></li>
-                    <li><a href="#" data-target="mock-backend">Interactive Demo (Backend)</a></li>
-                </ul>
+                <a href="#frontend-features">Frontend</a>
             </li>
 
             <li><a href="#search-results-section">Search</a></li>
@@ -55,59 +38,151 @@
     </nav>
 
     <main>
-        <!-- All your existing content sections remain unchanged -->
-        <!-- ... (project-overview, architecture, backend-api, frontend-features, mock-interaction, search-results-section) ... -->
+        <!-- Project Overview -->
+        <section id="project-overview">
+            <h2>Project Overview & Requirements</h2>
+            <p>This software solution manages metadata for various media types, providing a persistent backend API and a user-friendly graphical interface (GUI).</p>
+
+            <h3>Media Categories</h3>
+            <ul>
+                <li><strong>Book</strong></li>
+                <li><strong>Film</strong></li>
+                <li><strong>Magazine</strong></li>
+            </ul>
+
+            <h3>Stored Metadata</h3>
+            <ol>
+                <li>Name (Title)</li>
+                <li>Publication date</li>
+                <li>Author (or Director/Creator)</li>
+                <li>Category</li>
+            </ol>
+        </section>
+
+        <!-- Architecture -->
+        <section id="architecture">
+            <h2>System Architecture</h2>
+
+            <div class="accordion-content" id="architecture-back-overview">
+                <h3>Architecture — Summary</h3>
+                <p>The system uses a two-tier architecture: Backend (Flask) for persistence & API; Frontend (PyQt/PySide) as a desktop GUI client communicating via HTTP/JSON.</p>
+                <blockquote>
+                    <p>The <strong>Backend (Flask)</strong> handles data persistence (JSON/Pickle) and API requests. The <strong>Frontend (PyQt/PySide)</strong> is a desktop GUI application that acts as the client, communicating with the backend via HTTP/JSON.</p>
+                    <cite>Concept Documentation (Task 1)</cite>
+                </blockquote>
+            </div>
+
+            <div class="accordion-content" id="architecture-backend">
+                <h3>Backend (Flask)</h3>
+                <p>The backend handles data persistence (JSON/Pickle) and HTTP API requests. It provides CRUD operations for all media types and exposes endpoints such as:</p>
+                <ul>
+                    <li><code>GET /media</code> — list all media</li>
+                    <li><code>GET /media?category=Book</code> — filter by category</li>
+                    <li><code>GET /media/{id}</code> — get metadata</li>
+                    <li><code>POST /media</code> — create</li>
+                    <li><code>PUT /media/{id}</code> — update</li>
+                    <li><code>DELETE /media/{id}</code> — delete</li>
+                </ul>
+            </div>
+
+            <div class="accordion-content" id="architecture-frontend">
+                <h3>Frontend (PyQt/PySide)</h3>
+                <p>The frontend is a desktop GUI application that interacts with the backend API to display media lists, perform searches, and present metadata. It also offers create/edit/delete functionality via forms that call the API.</p>
+            </div>
+        </section>
+
+        <!-- Backend/API -->
+        <section id="backend-api">
+            <h2>Backend (Flask) HTTP Endpoints</h2>
+
+            <div class="accordion-content" id="api-list">
+                <h3>List Endpoints</h3>
+                <p><strong>List All Media:</strong> GET <code>/media</code> — returns an array of media metadata objects.</p>
+                <p><strong>List by Category:</strong> GET <code>/media?category=&lt;category&gt;</code> — returns filtered results.</p>
+                <p><strong>Display Metadata:</strong> GET <code>/media/&lt;id&gt;</code> — returns the metadata for a single item.</p>
+            </div>
+
+            <div class="accordion-content" id="api-crud">
+                <h3>Search & CRUD</h3>
+                <p><strong>Search by Name (Exact):</strong> GET <code>/media?name=&lt;name&gt;</code></p>
+                <p><strong>Create New Media:</strong> POST <code>/media</code> — payload includes name, author, date, category.</p>
+                <p><strong>Update Metadata:</strong> PUT <code>/media/&lt;id&gt;</code></p>
+                <p><strong>Delete Media:</strong> DELETE <code>/media/&lt;id&gt;</code></p>
+            </div>
+        </section>
+
+        <!-- Frontend features -->
+        <section id="frontend-features">
+            <h2>Frontend (PyQt/PySide) GUI Features</h2>
+
+            <div class="accordion-content" id="gui-visual">
+                <h3>Data Visualization</h3>
+                <p>Display lists with title, author, publication date and category. Sorting and simple charts could be added as enhancements.</p>
+            </div>
+
+            <div class="accordion-content" id="gui-crud">
+                <h3>CRUD Forms</h3>
+                <p>Dedicated forms for creating, editing, and deleting records that communicate with the backend API via HTTP/JSON.</p>
+                <p>Interactive search and category dropdown allow filtering results on the client side or via API queries.</p>
+            </div>
+        </section>
+
+        <!-- Interactive demo -->
+        <section id="mock-interaction">
+            <h2>Interactive Demo (Mock Interaction)</h2>
+            <div class="mock-layout-container">
+                <div class="mock-list-panel">
+                    <h3>Client View: Media List</h3>
+                    <ul>
+                        <li><span class="media-item-link" data-target="detail-book1" onclick="showMediaDetail(this)">Book: The Python Primer</span></li>
+                        <li><span class="media-item-link" data-target="detail-film1" onclick="showMediaDetail(this)">Film: Project Deployment</span></li>
+                        <li><span class="media-item-link" data-target="detail-mag1" onclick="showMediaDetail(this)">Magazine: Flask Insights Q3</span></li>
+                    </ul>
+                </div>
+
+                <div class="mock-detail-panel">
+                    <h3>Backend Response: Detail View</h3>
+
+                    <div id="detail-default" class="media-detail-block is-active">
+                        <p>Click on a media item in the list to simulate the API call and view its metadata.</p>
+                    </div>
+
+                    <div id="detail-book1" class="media-detail-block">
+                        <h4>Book: The Python Primer</h4>
+                        <p><strong>Author:</strong> A. Developer</p>
+                        <p><strong>Published:</strong> 2024-01-15</p>
+                    </div>
+
+                    <div id="detail-film1" class="media-detail-block">
+                        <h4>Film: Project Deployment</h4>
+                        <p><strong>Director:</strong> B. Analyst</p>
+                        <p><strong>Published:</strong> 2023-11-01</p>
+                    </div>
+
+                    <div id="detail-mag1" class="media-detail-block">
+                        <h4>Magazine: Flask Insights Q3</h4>
+                        <p><strong>Author:</strong> C. Engineer</p>
+                        <p><strong>Published:</strong> 2024-07-01</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search results -->
+        <section id="search-results-section">
+            <h2>🔍 Media Search Results</h2>
+            <p>Enter a title, author, or keyword in the search bar above and click 'Search' to view results from the mocked library database.</p>
+
+            <div id="results-container">
+                <p style="font-style: italic; color: #555;">No search results yet.</p>
+            </div>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2025 Online Library Project | Full-Stack Python Solution</p>
     </footer>
 
-    <!-- Added JS for dropdown + section toggle -->
-    <script>
-        // Dropdown toggle
-        document.querySelectorAll('.dropbtn').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.preventDefault();
-                const dropdown = btn.nextElementSibling;
-                document.querySelectorAll('.dropdown').forEach(d => {
-                    if(d !== dropdown) d.classList.remove('show');
-                });
-                dropdown.classList.toggle('show');
-            });
-        });
-
-        // Hide dropdown if click outside
-        window.addEventListener('click', e => {
-            if(!e.target.matches('.dropbtn')) {
-                document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
-            }
-        });
-
-        // Section toggle when submenu clicked
-        document.querySelectorAll('.dropdown li a').forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                const targetId = link.dataset.target;
-                if(!targetId) return;
-
-                // Hide all accordion-content sections
-                document.querySelectorAll('.accordion-content').forEach(sec => sec.style.display = 'none');
-                // Show target section
-                const targetSec = document.getElementById(targetId);
-                if(targetSec) targetSec.style.display = 'block';
-
-                // Scroll to section
-                targetSec.scrollIntoView({behavior: "smooth"});
-            });
-        });
-
-        // Initially hide all accordion content except first (optional)
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.accordion-content').forEach(sec => sec.style.display = 'none');
-            const first = document.querySelector('.accordion-content');
-            if(first) first.style.display = 'block';
-        });
-    </script>
+    <script src="script.js?v=1.4"></script>
 </body>
 </html>

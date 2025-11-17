@@ -8,9 +8,9 @@ nav {
     z-index: 1000;
 
     display: flex;
-    justify-content: center;   /* Centers the whole menu */
+    justify-content: center;
     align-items: center;
-    gap: 60px;                 /* Space between main menu items */
+    gap: 60px;
 }
 
 .nav-menu { 
@@ -18,7 +18,7 @@ nav {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 50px;                 /* Even clean spacing between menu items */
+    gap: 50px;
     margin: 0;
     padding: 0;
 }
