@@ -106,7 +106,7 @@ footer {
     margin-top:40px;
 }
 
-/* --- NAVIGATION FIX: RESTORING HOVER FUNCTIONALITY --- */
+/* --- NAVIGATION FIX: FORCING VISIBILITY AND INLINE DISPLAY --- */
 nav { 
     display:flex; 
     justify-content:space-between; 
@@ -121,25 +121,21 @@ nav {
 }
 .nav-menu { 
     list-style:none; 
-    display:flex; 
-    gap:20px; /* Restored gap */
+    /* Use display: flex to lay out main links and sub-links side-by-side */
+    display: flex; 
     margin:0; 
     padding:0;
     margin-right: 20px; 
 }
 .nav-menu > li { 
     position:relative;
-    display: block; /* Restored block display for list item */
+    /* Allow the <li> to be flexible in size */
+    display: flex;
+    align-items: center; 
 }
 .nav-menu > li > a::after { 
-    /* Restore the arrow indicator */
-    content:" ▼"; 
-    font-size:0.7em; 
-    margin-left:5px; 
-    transition:transform 0.3s;
-}
-.nav-menu li:hover > a::after { 
-    transform:rotate(-180deg);
+    /* Remove the arrow, as all sub-links are visible */
+    content: none !important; 
 }
 .nav-menu a { 
     display:block; 
@@ -153,39 +149,41 @@ nav {
     border-radius:0;
 }
 
-/* --- DROPDOWN (SUB-MENU) HIDING AND SHOWING --- */
+/* --- CRITICAL FIX: PERMANENTLY DISPLAY SUB-MENUS INLINE --- */
 .dropdown { 
-    /* Initial state: Hidden and off-screen */
-    display:block; 
-    max-height:0; 
-    overflow:hidden; 
-    position:absolute; /* Positioning relative to parent <li> */
-    top:100%; 
-    left:0; 
-    background:#495057; 
-    list-style:none; 
-    padding:0; 
-    min-width:180px; 
-    border-radius:0 0 6px 6px; 
-    box-shadow:0 5px 10px rgba(0,0,0,0.3); 
-    opacity:0; 
-    transition:max-height 0.3s, opacity 0.3s;
-}
-/* State on Hover: Visible */
-.nav-menu li:hover .dropdown { 
-    max-height:500px; 
-    opacity:1;
+    /* Force dropdown to display inline immediately after its parent link */
+    display: flex !important; 
+    flex-direction: row !important; /* Display sub-items horizontally */
+    list-style: none !important;
+    
+    /* AGGRESSIVELY OVERRIDE HIDING PROPERTIES */
+    max-height: none !important;
+    overflow: visible !important;
+    position: static !important; /* Makes it flow inline with the nav bar */
+    opacity: 1 !important;
+    background: transparent !important; 
+    box-shadow: none !important;
+    padding: 0 10px !important; /* Add some padding around the group */
+    margin: 0 !important;
+    min-width: 0 !important;
+    transition: none !important;
 }
 
+/* Style for the sub-links inside the dropdown */
 .dropdown li a { 
-    padding:10px; 
-    display:block; 
-    color:white; 
-    text-decoration:none;
+    padding: 15px 10px !important; /* Smaller padding for inline links */
+    display: block !important; 
+    color: white !important; 
+    text-decoration: none !important;
+    background: transparent !important;
 }
+/* Ensure the sub-links highlight correctly on hover */
 .dropdown li a:hover { 
-    background:#6c757d; 
-    border-radius:0 0 6px 6px;
+    background: #495057 !important; 
+}
+/* Hide the main link's hover background when hovering over a sub-link */
+.nav-menu li:hover > a {
+    background: transparent !important; 
 }
 
 
