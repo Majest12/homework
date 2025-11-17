@@ -1,66 +1,66 @@
 /* General Styles - ADJUSTED for modern look */
 body { 
-    /* Changed font for a cleaner, modern look */
-    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    margin:0; 
-    padding:0; 
-    background:#ffffff; /* Clean white background for the whole page */
-    color:#333; 
-    scroll-behavior:smooth;
+    /* Changed font for a cleaner, modern look */
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin:0; 
+    padding:0; 
+    background:#ffffff; /* Clean white background for the whole page */
+    color:#333; 
+    scroll-behavior:smooth;
 }
 
 /* Header & Hero Section - ADJUSTED */
 header { 
-    /* Creating a spacious "Hero" feel */
-    background: #f8f9fa; /* Light grey/off-white background */
-    color: #333; /* Darker text color */
-    padding: 60px 20px; /* Increased padding for spaciousness */
-    text-align: center;
-    border-bottom: none; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Soft, subtle shadow */
+    /* Creating a spacious "Hero" feel */
+    background: #f8f9fa; /* Light grey/off-white background */
+    color: #333; /* Darker text color */
+    padding: 60px 20px; /* Increased padding for spaciousness */
+    text-align: center;
+    border-bottom: none; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Soft, subtle shadow */
 }
 header h1 { 
-    margin: 0; 
-    font-size: 3em; /* Larger, bolder main title */
-    color: #000; /* Black for strong emphasis */
+    margin: 0; 
+    font-size: 3em; /* Larger, bolder main title */
+    color: #000; /* Black for strong emphasis */
 }
 header p { 
-    margin-top: 10px; 
-    font-size: 1.3em; /* Larger subheading/tagline */
-    color: #555;
-    font-weight: 300; /* Lighter font weight for modern feel */
+    margin-top: 10px; 
+    font-size: 1.3em; /* Larger subheading/tagline */
+    color: #555;
+    font-weight: 300; /* Lighter font weight for modern feel */
 }
 
 /* Main Content & Sections - ADJUSTED */
 main { 
-    max-width: 1100px; /* Slightly wider main container */
-    margin: 40px auto; /* Increased top/bottom margin */
-    padding: 0 30px;
+    max-width: 1100px; /* Slightly wider main container */
+    margin: 40px auto; /* Increased top/bottom margin */
+    padding: 0 30px;
 }
 section { 
-    background:white; 
-    padding: 40px; /* Increased padding inside sections */
-    margin-bottom: 40px; /* Increased spacing between sections */
-    border-radius: 12px; /* Softer, rounder corners */
-    /* SOFTER, MORE PROFESSIONAL SHADOW */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-    border: 1px solid #eee; /* Subtle, light border */
+    background:white; 
+    padding: 40px; /* Increased padding inside sections */
+    margin-bottom: 40px; /* Increased spacing between sections */
+    border-radius: 12px; /* Softer, rounder corners */
+    /* SOFTER, MORE PROFESSIONAL SHADOW */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+    border: 1px solid #eee; /* Subtle, light border */
 }
 
 /* Headings - ADJUSTED */
 h2 { 
-    color: #1a73e8; /* A professional, deep blue accent color */
-    border-bottom: 2px solid #f0f0f0; /* Lighter separator line */
-    padding-bottom: 15px; 
-    margin-top: 0;
-    font-weight: 600;
-    font-size: 2em;
+    color: #1a73e8; /* A professional, deep blue accent color */
+    border-bottom: 2px solid #f0f0f0; /* Lighter separator line */
+    padding-bottom: 15px; 
+    margin-top: 0;
+    font-weight: 600;
+    font-size: 2em;
 }
 h3 { 
-    color: #333; 
-    margin-top: 25px;
-    font-size: 1.4em;
-    font-weight: 500;
+    color: #333; 
+    margin-top: 25px;
+    font-size: 1.4em;
+    font-weight: 500;
 }
 
 ul, ol { padding-left:20px;}
@@ -68,55 +68,55 @@ ul li, ol li { margin-bottom:8px;}
 
 /* Blockquote/Callout - ADJUSTED */
 blockquote { 
-    background:#e8f0fe; /* Very light blue background */
-    border-left:5px solid #1a73e8; /* Matching the h2 accent color */
-    padding:20px; 
-    margin:25px 0; 
-    font-style:italic; 
-    color:#555;
-    border-radius: 4px;
+    background:#e8f0fe; /* Very light blue background */
+    border-left:5px solid #1a73e8; /* Matching the h2 accent color */
+    padding:20px; 
+    margin:25px 0; 
+    font-style:italic; 
+    color:#555;
+    border-radius: 4px;
 }
 
 /* Tables - ADJUSTED */
 table { 
-    width:100%; 
-    border-collapse:collapse; 
-    margin-top:20px;
+    width:100%; 
+    border-collapse:collapse; 
+    margin-top:20px;
 }
 th, td { 
-    border:1px solid #f0f0f0; /* Lighter border for a cleaner table */
-    padding:15px; /* More padding in table cells */
-    text-align:left;
+    border:1px solid #f0f0f0; /* Lighter border for a cleaner table */
+    padding:15px; /* More padding in table cells */
+    text-align:left;
 }
 th { 
-    background:#1a73e8; /* Matching the new accent color */
-    color:white; 
-    font-weight:600;
+    background:#1a73e8; /* Matching the new accent color */
+    color:white; 
+    font-weight:600;
 }
 tr:nth-child(even){ 
-    background:#f9f9f9; /* Subtle striping */
+    background:#f9f9f9; /* Subtle striping */
 }
 
 /* Footer - ADJUSTED */
 footer { 
-    text-align:center; 
-    padding:20px; 
-    background:#343a40; /* Matching the navigation bar */
-    color:white; 
-    margin-top:40px;
+    text-align:center; 
+    padding:20px; 
+    background:#343a40; /* Matching the navigation bar */
+    color:white; 
+    margin-top:40px;
 }
 
 /* Navigation - ADJUSTED */
 nav { 
-    display:flex; 
-    justify-content:space-between; 
-    align-items:center; 
-    background:#343a40; /* Darker, sleek navigation bar */
-    padding:0 30px; 
-    position:sticky; 
-    top:0; 
-    z-index:1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    background:#343a40; /* Darker, sleek navigation bar */
+    padding:0 30px; 
+    position:sticky; 
+    top:0; 
+    z-index:1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 .nav-menu { list-style:none; display:flex; gap:20px; margin:0; padding:0;}
 .nav-menu > li { position:relative;}
@@ -132,11 +132,11 @@ nav {
 /* Search - MINOR ADJUSTMENT */
 .search-container { position:relative; display: flex; align-items: center;} /* Added display: flex for button alignment */
 #search-input { 
-    padding:10px 15px; 
-    border-radius:20px; /* Pill shape for a modern look */
-    border:none; 
-    outline:none; 
-    width:200px;
+    padding:10px 15px; 
+    border-radius:20px; /* Pill shape for a modern look */
+    border:none; 
+    outline:none; 
+    width:200px;
 }
 .search-results { display:none; position:absolute; top:100%; left:0; width:300px; max-height:250px; overflow-y:auto; background:white; border:1px solid #ddd; border-radius:0 0 6px 6px; box-shadow:0 2px 5px rgba(0,0,0,0.2); z-index:200; padding:10px; flex-wrap:wrap; gap:10px;}
 .search-results img { width:80px; height:80px; object-fit:cover; border-radius:4px; cursor:pointer; transition:transform 0.2s;}
@@ -145,10 +145,54 @@ nav {
 /* Mock Interaction Panel */
 .mock-layout-container { display:flex; gap:20px; margin-top:20px; min-height:400px;}
 .mock-list-panel { flex:1; background:#f0f8ff; padding:20px; border-radius:6px; border:1px solid #cceeff;}
-.mock-list-panel ul li a { display:block; padding:8px 10px; margin-bottom:5px; text-decoration:none; color:#1a73e8; border-left:5px solid transparent; transition:background 0.2s, border-left 0.2s;}
-.mock-list-panel ul li a:hover { background:#e8f0fe; border-left:5px solid #1a73e8;}
+/* MODIFIED: Changed <a> to .media-item-link span style */
+.mock-list-panel ul li .media-item-link { 
+    display:block; 
+    padding:8px 10px; 
+    margin-bottom:5px; 
+    text-decoration:none; 
+    color:#1a73e8; 
+    border-left:5px solid transparent; 
+    transition:background 0.2s, border-left 0.2s;
+    cursor: pointer; /* Indicate it's clickable */
+}
+.mock-list-panel ul li .media-item-link:hover { 
+    background:#e8f0fe; 
+    border-left:5px solid #1a73e8;
+}
+
 .mock-detail-panel { flex:2; padding:15px; border:1px solid #e0e0e0; border-radius:6px; background:#fff;}
-.media-detail-block { display:none; padding:10px; border:1px dashed #ccc; border-radius:4px; opacity:0; transform:translateY(10px); transition:opacity 0.4s, transform 0.4s;}
-.media-detail-block:target { display:block; border:1px solid #1a73e8; background:#e6f0ff; opacity:1; transform:translateY(0);}
-#detail-default { display:block; background:#f7f7f7; border-style:solid;}
-.media-detail-block:target ~ #detail-default { display:none;}
+
+/* MODIFIED: Used JS controlled classes instead of :target */
+.media-detail-block { 
+    display: block; /* MUST be 'block' for smooth transitions */
+    padding: 10px; 
+    border: 1px dashed #ccc; 
+    border-radius: 4px; 
+    opacity: 0; 
+    height: 0; /* Hides content area when not active */
+    overflow: hidden; 
+    transform: translateY(10px); 
+    /* Added height transition for smooth collapse/expand */
+    transition: opacity 0.4s, transform 0.4s, height 0.4s; 
+}
+
+/* NEW CLASS: Controls visibility via JavaScript */
+.media-detail-block.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    height: auto; /* Show content height */
+    border: 1px solid #1a73e8;
+    background: #e6f0ff;
+    padding: 15px; /* Restore padding when active */
+}
+
+/* Ensure default panel is shown correctly at startup */
+#detail-default.is-active { 
+    border: 1px solid #e0e0e0;
+    background: #f7f7f7;
+    height: auto;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 15px;
+}
