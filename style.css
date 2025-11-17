@@ -122,13 +122,13 @@ nav {
 .nav-menu { 
     list-style:none; 
     display: flex; /* Display all <li> elements horizontally */
+    gap: 0; /* Remove gap between adjacent links */
     margin:0; 
     padding:0;
     margin-right: 20px; 
 }
 .nav-menu > li { 
     position:relative;
-    /* Removed the hover logic class structure, just display inline-flex for better alignment */
     display: flex;
     align-items: center; 
 }
@@ -143,18 +143,9 @@ nav {
     background:#495057; 
     border-radius:0;
 }
-/* Style for sub-links (now flattened) to visually distinguish them */
-.nav-menu .sub-link {
-    font-size: 0.9em;
-    padding: 15px 10px; /* Smaller padding */
-    opacity: 0.8;
-}
-.nav-menu .sub-link:hover {
-    background: #495057;
-    opacity: 1;
-}
+/* Removed .sub-link styling as all links are now the same */
 
-/* --- DROPDOWN RULES REMOVED: NO LONGER APPLICABLE --- */
+/* --- DROPDOWN RULES (FULLY REMOVED) --- */
 
 
 /* Search - MINOR ADJUSTMENT */
