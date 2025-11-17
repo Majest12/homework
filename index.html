@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Media Search Library</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Media Search Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <header>
     <h1>📚 Online Media Library</h1>
     <p>A Robust, Full-Stack Python Solution: Flask Backend + PyQt GUI Frontend</p>
@@ -29,7 +30,7 @@
             <a href="#" class="dropbtn">API Endpoints ▼</a>
             <ul class="dropdown-content">
                 <li><a href="#" data-target="api-list">List All Media</a></li>
-                <li><a href="#" data-target="api-search">Search Media</a></li>
+                <li><a href="#" data-target="api-search">Search & CRUD</a></li>
             </ul>
         </li>
 
@@ -64,49 +65,57 @@
         <p>This software solution manages metadata for various media types, providing a persistent backend API and a user-friendly GUI.</p>
     </section>
 
-    <!-- Architecture Section -->
+    <!-- Architecture -->
     <section id="architecture">
         <h2>System Architecture</h2>
         <div class="accordion-content" id="architecture-backend">
             <h3>Backend (Flask)</h3>
-            <p>The backend handles data persistence (JSON/Pickle) and API requests.</p>
+            <p>The backend handles data persistence (JSON/Pickle) and HTTP API requests.</p>
+            <p>It provides CRUD operations for all media types and communicates with the frontend via JSON.</p>
         </div>
         <div class="accordion-content" id="architecture-frontend">
             <h3>Frontend (PyQt/PySide)</h3>
-            <p>The frontend is a desktop GUI client communicating with the backend via HTTP/JSON.</p>
+            <p>The frontend is a desktop GUI application.</p>
+            <p>It interacts with the backend API to display media, create/edit/delete entries, and perform searches.</p>
         </div>
     </section>
 
-    <!-- API Endpoints Section -->
+    <!-- API Endpoints -->
     <section id="backend-api">
         <h2>Backend API Endpoints</h2>
         <div class="accordion-content" id="api-list">
-            <p>List All Media, List by Category, Display Metadata.</p>
+            <p><strong>List All Media:</strong> GET request to retrieve all media entries.</p>
+            <p><strong>List by Category:</strong> GET request filtered by media category.</p>
+            <p><strong>Display Metadata:</strong> GET request to fetch metadata of a specific item.</p>
         </div>
         <div class="accordion-content" id="api-search">
-            <p>Search by Name, Create, Update, Delete Media.</p>
+            <p><strong>Search by Name:</strong> GET request with exact name match.</p>
+            <p><strong>Create New Media:</strong> POST request to add a new entry.</p>
+            <p><strong>Update Metadata:</strong> PUT request to edit an existing entry.</p>
+            <p><strong>Delete Media:</strong> DELETE request to remove an entry.</p>
         </div>
     </section>
 
-    <!-- GUI Features Section -->
+    <!-- GUI Features -->
     <section id="frontend-features">
         <h2>GUI Features</h2>
         <div class="accordion-content" id="gui-visual">
-            <p>Display media lists with key metadata.</p>
+            <p><strong>Data Visualization:</strong> Shows lists of media with title, author, publication date, and category.</p>
         </div>
         <div class="accordion-content" id="gui-crud">
-            <p>Forms for creating, editing, deleting records.</p>
+            <p><strong>CRUD Forms:</strong> Forms for creating, editing, and deleting media entries interact with the backend API.</p>
+            <p><strong>Interactive Search:</strong> Quickly filter or search the media library.</p>
         </div>
     </section>
 
-    <!-- Interactive Demo Section -->
+    <!-- Interactive Demo -->
     <section id="mock-interaction">
         <h2>Interactive Demo</h2>
         <div class="accordion-content" id="mock-client">
-            <p>Client-side media list view.</p>
+            <p><strong>Client View:</strong> Displays the media list from the frontend interface. Click items to simulate API calls.</p>
         </div>
         <div class="accordion-content" id="mock-backend">
-            <p>Backend response details for selected media.</p>
+            <p><strong>Backend Response:</strong> Shows simulated metadata responses from the backend for selected media items.</p>
         </div>
     </section>
 
@@ -134,7 +143,7 @@
         }
     };
 
-    // Accordion behavior: show/hide sections on submenu click
+    // Accordion behavior
     document.querySelectorAll('.dropdown-content a').forEach(link => {
         link.addEventListener('click', e => {
             e.preventDefault();
@@ -145,8 +154,9 @@
         });
     });
 
-    // By default, hide all accordion contents
+    // Hide all accordion contents initially
     document.querySelectorAll('.accordion-content').forEach(sec => sec.style.display = 'none');
 </script>
+
 </body>
 </html>
