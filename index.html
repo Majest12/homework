@@ -15,24 +15,15 @@
 
     <nav>
         <ul class="nav-menu">
-            <li><a href="#project-overview">Project</a>
-                <ul class="dropdown">
-                    <li><a href="#project-overview">Overview</a></li>
-                    <li><a href="#architecture">Architecture</a></li>
-                </ul>
-            </li>
-            <li><a href="#backend-api">Backend</a>
-                <ul class="dropdown">
-                    <li><a href="#backend-api">API Endpoints</a></li>
-                </ul>
-            </li>
-            <li><a href="#frontend-features">Frontend</a>
-                <ul class="dropdown">
-                    <li><a href="#frontend-features">GUI Features</a></li>
-                    <li><a href="#mock-interaction">Interactive Demo</a></li>
-                </ul>
-            </li>
-            <li><a href="#search-results-section">Search</a></li> 
+                        <li><a href="#project-overview">Project</a></li>
+            <li><a href="#project-overview" class="sub-link">Overview</a></li>
+            <li><a href="#architecture" class="sub-link">Architecture</a></li>
+                        <li><a href="#backend-api">Backend</a></li>
+            <li><a href="#backend-api" class="sub-link">API Endpoints</a></li>
+                        <li><a href="#frontend-features">Frontend</a></li>
+            <li><a href="#frontend-features" class="sub-link">GUI Features</a></li>
+            <li><a href="#mock-interaction" class="sub-link">Interactive Demo</a></li>
+                        <li><a href="#search-results-section">Search</a></li> 
         </ul>
         <div class="search-container">
             <input type="text" id="search-input" placeholder="Search Title/Author..." aria-label="Search media">
@@ -140,7 +131,7 @@
                 <div class="mock-list-panel">
                     <h3>Client View: Media List</h3>
                     <ul>
-                                                <li><span class="media-item-link" data-target="detail-book1" onclick="showMediaDetail(this)">Book: The Python Primer</span></li>
+                        <li><span class="media-item-link" data-target="detail-book1" onclick="showMediaDetail(this)">Book: The Python Primer</span></li>
                         <li><span class="media-item-link" data-target="detail-film1" onclick="showMediaDetail(this)">Film: Project Deployment</span></li>
                         <li><span class="media-item-link" data-target="detail-mag1" onclick="showMediaDetail(this)">Magazine: Flask Insights Q3</span></li>
                     </ul>
@@ -158,12 +149,10 @@
                     <div id="detail-film1" class="media-detail-block">
                         <h4>Film: Project Deployment</h4>
                         <p><strong>Director:</strong> B. Analyst</p>
-                        <p><strong>Published:</strong> 2023-11-01</p>
                     </div>
                     <div id="detail-mag1" class="media-detail-block">
                         <h4>Magazine: Flask Insights Q3</h4>
                         <p><strong>Author:</strong> C. Engineer</p>
-                        <p><strong>Published:</strong> 2024-07-01</p>
                     </div>
                 </div>
             </div>

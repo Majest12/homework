@@ -106,7 +106,7 @@ footer {
     margin-top:40px;
 }
 
-/* --- NAVIGATION FIX: FORCING VISIBILITY AND INLINE DISPLAY --- */
+/* --- NAVIGATION FIX: FLAT STRUCTURE DISPLAY --- */
 nav { 
     display:flex; 
     justify-content:space-between; 
@@ -121,21 +121,16 @@ nav {
 }
 .nav-menu { 
     list-style:none; 
-    /* Use display: flex to lay out main links and sub-links side-by-side */
-    display: flex; 
+    display: flex; /* Display all <li> elements horizontally */
     margin:0; 
     padding:0;
     margin-right: 20px; 
 }
 .nav-menu > li { 
     position:relative;
-    /* Allow the <li> to be flexible in size */
+    /* Removed the hover logic class structure, just display inline-flex for better alignment */
     display: flex;
     align-items: center; 
-}
-.nav-menu > li > a::after { 
-    /* Remove the arrow, as all sub-links are visible */
-    content: none !important; 
 }
 .nav-menu a { 
     display:block; 
@@ -144,47 +139,22 @@ nav {
     font-weight:500; 
     text-decoration:none;
 }
-.nav-menu li:hover > a { 
+.nav-menu a:hover { 
     background:#495057; 
     border-radius:0;
 }
-
-/* --- CRITICAL FIX: PERMANENTLY DISPLAY SUB-MENUS INLINE --- */
-.dropdown { 
-    /* Force dropdown to display inline immediately after its parent link */
-    display: flex !important; 
-    flex-direction: row !important; /* Display sub-items horizontally */
-    list-style: none !important;
-    
-    /* AGGRESSIVELY OVERRIDE HIDING PROPERTIES */
-    max-height: none !important;
-    overflow: visible !important;
-    position: static !important; /* Makes it flow inline with the nav bar */
-    opacity: 1 !important;
-    background: transparent !important; 
-    box-shadow: none !important;
-    padding: 0 10px !important; /* Add some padding around the group */
-    margin: 0 !important;
-    min-width: 0 !important;
-    transition: none !important;
+/* Style for sub-links (now flattened) to visually distinguish them */
+.nav-menu .sub-link {
+    font-size: 0.9em;
+    padding: 15px 10px; /* Smaller padding */
+    opacity: 0.8;
+}
+.nav-menu .sub-link:hover {
+    background: #495057;
+    opacity: 1;
 }
 
-/* Style for the sub-links inside the dropdown */
-.dropdown li a { 
-    padding: 15px 10px !important; /* Smaller padding for inline links */
-    display: block !important; 
-    color: white !important; 
-    text-decoration: none !important;
-    background: transparent !important;
-}
-/* Ensure the sub-links highlight correctly on hover */
-.dropdown li a:hover { 
-    background: #495057 !important; 
-}
-/* Hide the main link's hover background when hovering over a sub-link */
-.nav-menu li:hover > a {
-    background: transparent !important; 
-}
+/* --- DROPDOWN RULES REMOVED: NO LONGER APPLICABLE --- */
 
 
 /* Search - MINOR ADJUSTMENT */
