@@ -1,190 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Media Search Library</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dynamic Media Search Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>📚 Online Media Library</h1>
-        <p>A Robust, Full-Stack Python Solution: Flask Backend + PyQt GUI Frontend</p>
-    </header>
+    <header>
+        <h1>📚 Online Media Library</h1>
+        <p>A Robust, Full-Stack Python Solution: Flask Backend + PyQt GUI Frontend</p>
+    </header>
 
-    <nav>
-        <ul class="nav-menu">
-            <li><a href="#project-overview">Project</a>
-                <ul class="dropdown">
-                    <li><a href="#project-overview">Overview</a></li>
-                    <li><a href="#architecture">Architecture</a></li>
-                </ul>
-            </li>
-            <li><a href="#backend-api">Backend</a>
-                <ul class="dropdown">
-                    <li><a href="#backend-api">API Endpoints</a></li>
-                </ul>
-            </li>
-            <li><a href="#frontend-features">Frontend</a>
-                <ul class="dropdown">
-                    <li><a href="#frontend-features">GUI Features</a></li>
-                    <li><a href="#mock-interaction">Interactive Demo</a></li>
-                </ul>
-            </li>
-            <li><a href="#search-results-section">Search</a></li> 
-        </ul>
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search Title/Author..." aria-label="Search media">
-            <button id="search-button" style="padding: 10px 15px; margin-left: 10px; border-radius: 20px; border: none; background: #1a73e8; color: white; cursor: pointer; font-weight: 500;">🔍 Search</button>
-            <div class="search-results" id="search-results"></div>
-        </div>
-    </nav>
+    <nav>
+        <ul class="nav-menu">
+            <li>
+                <a href="#project-overview" class="dropbtn">Project ▼</a>
+                <ul class="dropdown">
+                    <!-- Submenu items for Project -->
+                    <li><a href="#" data-target="project-overview">Overview</a></li>
+                    <li><a href="#" data-target="architecture-back-overview">Architecture (Summary)</a></li>
+                </ul>
+            </li>
 
-    <main>
-        <section id="project-overview">
-            <h2>Project Overview & Requirements</h2>
-            <p>This software solution manages metadata for various media types, providing a persistent backend API and a user-friendly graphical interface (GUI).</p>
-            <h3>Media Categories</h3>
-            <ul>
-                <li><strong>Book</strong></li>
-                <li><strong>Film</strong></li>
-                <li><strong>Magazine</strong></li>
-            </ul>
-            <h3>Stored Metadata</h3>
-            <ol>
-                <li>Name (Title)</li>
-                <li>Publication date</li>
-                <li>Author (or Director/Creator)</li>
-                <li>Category</li>
-            </ol>
-        </section>
+            <li>
+                <a href="#backend-api" class="dropbtn">Backend ▼</a>
+                <ul class="dropdown">
+                    <!-- Submenu items for Backend -->
+                    <li><a href="#" data-target="api-list">API Endpoints (List)</a></li>
+                    <li><a href="#" data-target="api-crud">API Endpoints (Search / CRUD)</a></li>
+                </ul>
+            </li>
 
-        <section id="architecture">
-            <h2>System Architecture</h2>
-            <p>The system uses a two-tier architecture:</p>
-            <blockquote>
-                <p>The <strong>Backend (Flask)</strong> handles data persistence (JSON/Pickle) and API requests. The <strong>Frontend (PyQt/PySide)</strong> is a desktop GUI application that acts as the client, communicating with the backend via HTTP/JSON.</p>
-                <cite>Concept Documentation (Task 1)</cite>
-            </blockquote>
-        </section>
+            <li>
+                <a href="#frontend-features" class="dropbtn">Frontend ▼</a>
+                <ul class="dropdown">
+                    <!-- Submenu items for Frontend -->
+                    <li><a href="#" data-target="gui-visual">GUI Features (Visualization)</a></li>
+                    <li><a href="#" data-target="gui-crud">GUI Features (CRUD)</a></li>
+                    <li><a href="#" data-target="mock-client">Interactive Demo (Client)</a></li>
+                    <li><a href="#" data-target="mock-backend">Interactive Demo (Backend)</a></li>
+                </ul>
+            </li>
 
-        <section id="backend-api">
-            <h2>Backend (Flask) HTTP Endpoints</h2>
-            <p>The API provides the following endpoints for media management (CRUD operations):</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Function</th>
-                        <th>Method</th>
-                        <th>Endpoint (Example)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>List All Media</td>
-                        <td>GET</td>
-                        <td><code>/media</code></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>List by Category</td>
-                        <td>GET</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Search by Name (Exact)</td>
-                        <td>GET</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Display Metadata</td>
-                        <td>GET</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Create New Media</td>
-                        <td>POST</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Update Metadata</td>
-                        <td>PUT</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Delete Media</td>
-                        <td>DELETE</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        
-        <section id="frontend-features">
-            <h2>Frontend (PyQt/PySide) GUI Features</h2>
-            <p>The client application offers a seamless desktop experience for interacting with the backend API.</p>
-            <ul>
-                <li><strong>Data Visualization:</strong> Displaying media lists with key metadata.</li>
-                <li><strong>CRUD Forms:</strong> Dedicated forms for creating, editing, and deleting records.</li>
-                <li><strong>Interactive Search:</strong> Quick filtering and searching capabilities.</li>
-                <li>**Client-Server Communication:** Efficient handling of HTTP/JSON requests.</li>
-            </ul>
-        </section>
+            <li><a href="#search-results-section">Search</a></li>
+        </ul>
 
-        <section id="mock-interaction">
-            <h2>Interactive Demo (Mock Interaction)</h2>
-            <p>Demonstrates the communication flow between the Frontend Client and the Flask Backend.</p>
-            <div class="mock-layout-container">
-                <div class="mock-list-panel">
-                    <h3>Client View: Media List</h3>
-                    <ul>
-                                                <li><span class="media-item-link" data-target="detail-book1" onclick="showMediaDetail(this)">Book: The Python Primer</span></li>
-                        <li><span class="media-item-link" data-target="detail-film1" onclick="showMediaDetail(this)">Film: Project Deployment</span></li>
-                        <li><span class="media-item-link" data-target="detail-mag1" onclick="showMediaDetail(this)">Magazine: Flask Insights Q3</span></li>
-                    </ul>
-                </div>
-                <div class="mock-detail-panel">
-                    <h3>Backend Response: Detail View</h3>
-                    <div id="detail-default" class="media-detail-block is-active">
-                        <p>Click on a media item in the list to simulate the API call and view its metadata.</p>
-                    </div>
-                    <div id="detail-book1" class="media-detail-block">
-                        <h4>Book: The Python Primer</h4>
-                        <p><strong>Author:</strong> A. Developer</p>
-                        <p><strong>Published:</strong> 2024-01-15</p>
-                    </div>
-                    <div id="detail-film1" class="media-detail-block">
-                        <h4>Film: Project Deployment</h4>
-                        <p><strong>Director:</strong> B. Analyst</p>
-                        <p><strong>Published:</strong> 2023-11-01</p>
-                    </div>
-                    <div id="detail-mag1" class="media-detail-block">
-                        <h4>Magazine: Flask Insights Q3</h4>
-                        <p><strong>Author:</strong> C. Engineer</p>
-                        <p><strong>Published:</strong> 2024-07-01</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search Title/Author..." aria-label="Search media">
+            <button id="search-button" style="padding: 10px 15px; margin-left: 10px; border-radius: 20px; border: none; background: #1a73e8; color: white; cursor: pointer; font-weight: 500;">🔍 Search</button>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </nav>
 
-        <section id="search-results-section">
-            <h2>🔍 Media Search Results</h2>
-            <p>Enter a title, author, or keyword in the search bar above and click 'Search' to view results from the mocked library database.</p>
-            
-            <div id="results-container">
-                <p style="font-style: italic; color: #555;">No search results yet.</p>
-            </div>
-        </section>
+    <main>
+        <!-- Project Overview (kept visible as a top-level page item) -->
+        <section id="project-overview">
+            <h2>Project Overview & Requirements</h2>
+            <p>This software solution manages metadata for various media types, providing a persistent backend API and a user-friendly graphical interface (GUI).</p>
 
-    </main>
+            <h3>Media Categories</h3>
+            <ul>
+                <li><strong>Book</strong></li>
+                <li><strong>Film</strong></li>
+                <li><strong>Magazine</strong></li>
+            </ul>
 
-    <footer>
-        <p>&copy; 2025 Online Library Project | Full-Stack Python Solution</p>
-    </footer>
+            <h3>Stored Metadata</h3>
+            <ol>
+                <li>Name (Title)</li>
+                <li>Publication date</li>
+                <li>Author (or Director/Creator)</li>
+                <li>Category</li>
+            </ol>
+        </section>
 
-    <script src="script.js?v=1.3"></script> 
+        <!-- Architecture section: two accordion sub-parts -->
+        <section id="architecture">
+            <h2>System Architecture</h2>
 
+            <div class="accordion-content" id="architecture-back-overview">
+                <h3>Architecture — Summary</h3>
+                <p>The system uses a two-tier architecture: Backend (Flask) for persistence & API; Frontend (PyQt/PySide) as a desktop GUI client communicating via HTTP/JSON.</p>
+                <blockquote>
+                    <p>The <strong>Backend (Flask)</strong> handles data persistence (JSON/Pickle) and API requests. The <strong>Frontend (PyQt/PySide)</strong> is a desktop GUI application that acts as the client, communicating with the backend via HTTP/JSON.</p>
+                    <cite>Concept Documentation (Task 1)</cite>
+                </blockquote>
+            </div>
+
+            <div class="accordion-content" id="architecture-backend">
+                <h3>Backend (Flask)</h3>
+                <p>The backend handles data persistence (JSON/Pickle) and HTTP API requests. It provides CRUD operations for all media types and exposes endpoints such as:</p>
+                <ul>
+                    <li><code>GET /media</code> — list all media</li>
+                    <li><code>GET /media?category=Book</code> — filter by category</li>
+                    <li><code>GET /media/{id}</code> — get metadata</li>
+                    <li><code>POST /media</code> — create</li>
+                    <li><code>PUT /media/{id}</code> — update</li>
+                    <li><code>DELETE /media/{id}</code> — delete</li>
+                </ul>
+            </div>
+
+            <div class="accordion-content" id="architecture-frontend">
+                <h3>Frontend (PyQt/PySide)</h3>
+                <p>The frontend is a desktop GUI application that interacts with the backend API to display media lists, perform searches, and present metadata. It also offers create/edit/delete functionality via forms that call the API.</p>
+            </div>
+        </section>
+
+        <!-- Backend/API section with accordion entries -->
+        <section id="backend-api">
+            <h2>Backend (Flask) HTTP Endpoints</h2>
+
+            <div class="accordion-content" id="api-list">
+                <h3>List Endpoints</h3>
+                <p><strong>List All Media:</strong> GET <code>/media</code> — returns an array of media metadata objects.</p>
+                <p><strong>List by Category:</strong> GET <code>/media?category=&lt;category&gt;</code> — returns filtered results.</p>
+                <p><strong>Display Metadata:</strong> GET <code>/media/&lt;id&gt;</code> — returns the metadata for a single item.</p>
+            </div>
+
+            <div class="accordion-content" id="api-crud">
+                <h3>Search & CRUD</h3>
+                <p><strong>Search by Name (Exact):</strong> GET <code>/media?name=&lt;name&gt;</code></p>
+                <p><strong>Create New Media:</strong> POST <code>/media</code> — payload includes name, author, date, category.</p>
+                <p><strong>Update Metadata:</strong> PUT <code>/media/&lt;id&gt;</code></p>
+                <p><strong>Delete Media:</strong> DELETE <code>/media/&lt;id&gt;</code></p>
+            </div>
+        </section>
+
+        <!-- Frontend features -->
+        <section id="frontend-features">
+            <h2>Frontend (PyQt/PySide) GUI Features</h2>
+
+            <div class="accordion-content" id="gui-visual">
+                <h3>Data Visualization</h3>
+                <p>Display lists with title, author, publication date and category. Sorting and simple charts could be added as enhancements.</p>
+            </div>
+
+            <div class="accordion-content" id="gui-crud">
+                <h3>CRUD Forms</h3>
+                <p>Dedicated forms for creating, editing, and deleting records that communicate with the backend API via HTTP/JSON.</p>
+                <p>Interactive search and category dropdown allow filtering results on the client side or via API queries.</p>
+            </div>
+        </section>
+
+        <!-- Interactive demo -->
+        <section id="mock-interaction">
+            <h2>Interactive Demo (Mock Interaction)</h2>
+            <div class="mock-layout-container">
+                <div class="mock-list-panel">
+                    <h3>Client View: Media List</h3>
+                    <ul>
+                        <li><span class="media-item-link" data-target="detail-book1" onclick="showMediaDetail(this)">Book: The Python Primer</span></li>
+                        <li><span class="media-item-link" data-target="detail-film1" onclick="showMediaDetail(this)">Film: Project Deployment</span></li>
+                        <li><span class="media-item-link" data-target="detail-mag1" onclick="showMediaDetail(this)">Magazine: Flask Insights Q3</span></li>
+                    </ul>
+                </div>
+
+                <div class="mock-detail-panel">
+                    <h3>Backend Response: Detail View</h3>
+
+                    <div id="detail-default" class="media-detail-block is-active">
+                        <p>Click on a media item in the list to simulate the API call and view its metadata.</p>
+                    </div>
+
+                    <div id="detail-book1" class="media-detail-block">
+                        <h4>Book: The Python Primer</h4>
+                        <p><strong>Author:</strong> A. Developer</p>
+                        <p><strong>Published:</strong> 2024-01-15</p>
+                    </div>
+
+                    <div id="detail-film1" class="media-detail-block">
+                        <h4>Film: Project Deployment</h4>
+                        <p><strong>Director:</strong> B. Analyst</p>
+                        <p><strong>Published:</strong> 2023-11-01</p>
+                    </div>
+
+                    <div id="detail-mag1" class="media-detail-block">
+                        <h4>Magazine: Flask Insights Q3</h4>
+                        <p><strong>Author:</strong> C. Engineer</p>
+                        <p><strong>Published:</strong> 2024-07-01</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search results -->
+        <section id="search-results-section">
+            <h2>🔍 Media Search Results</h2>
+            <p>Enter a title, author, or keyword in the search bar above and click 'Search' to view results from the mocked library database.</p>
+
+            <div id="results-container">
+                <p style="font-style: italic; color: #555;">No search results yet.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Online Library Project | Full-Stack Python Solution</p>
+    </footer>
+
+    <!-- load merged script -->
+    <script src="script.js?v=1.4"></script>
 </body>
 </html>
