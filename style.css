@@ -106,7 +106,7 @@ footer {
     margin-top:40px;
 }
 
-/* --- NAVIGATION FIXES --- */
+/* --- NAVIGATION FIX: RESTORING HOVER FUNCTIONALITY --- */
 nav { 
     display:flex; 
     justify-content:space-between; 
@@ -121,70 +121,71 @@ nav {
 }
 .nav-menu { 
     list-style:none; 
-    /* Changed to display: contents so the <li> elements flow directly */
-    display: flex; 
+    display:flex; 
+    gap:20px; /* Restored gap */
     margin:0; 
     padding:0;
     margin-right: 20px; 
 }
 .nav-menu > li { 
     position:relative;
-    /* Force main list items to display inline */
-    display: flex;
-    align-items: center; 
+    display: block; /* Restored block display for list item */
 }
 .nav-menu > li > a::after { 
-    /* Hide the dropdown arrow */
-    content: none; 
+    /* Restore the arrow indicator */
+    content:" ▼"; 
+    font-size:0.7em; 
+    margin-left:5px; 
+    transition:transform 0.3s;
+}
+.nav-menu li:hover > a::after { 
+    transform:rotate(-180deg);
 }
 .nav-menu a { 
     display:block; 
-    padding:15px 10px; /* Reduced padding slightly for more space */
+    padding:15px 15px; 
     color:white; 
     font-weight:500; 
     text-decoration:none;
 }
 .nav-menu li:hover > a { 
-    background: #495057; 
+    background:#495057; 
+    border-radius:0;
 }
 
-/* --- CRITICAL FIX: PERMANENTLY DISPLAY SUB-MENUS INLINE --- */
+/* --- DROPDOWN (SUB-MENU) HIDING AND SHOWING --- */
 .dropdown { 
-    /* Force dropdown to display inline immediately after its parent link */
-    display: flex; 
-    flex-direction: row; /* Display sub-items horizontally */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    
-    /* REMOVE ALL HIDING PROPERTIES */
-    max-height: none !important;
-    overflow: visible !important;
-    position: static !important;
-    opacity: 1 !important;
-    background: transparent !important; 
-    box-shadow: none !important;
-    min-width: 0 !important;
-    transition: none !important;
+    /* Initial state: Hidden and off-screen */
+    display:block; 
+    max-height:0; 
+    overflow:hidden; 
+    position:absolute; /* Positioning relative to parent <li> */
+    top:100%; 
+    left:0; 
+    background:#495057; 
+    list-style:none; 
+    padding:0; 
+    min-width:180px; 
+    border-radius:0 0 6px 6px; 
+    box-shadow:0 5px 10px rgba(0,0,0,0.3); 
+    opacity:0; 
+    transition:max-height 0.3s, opacity 0.3s;
+}
+/* State on Hover: Visible */
+.nav-menu li:hover .dropdown { 
+    max-height:500px; 
+    opacity:1;
 }
 
-/* Style for the sub-links inside the dropdown */
 .dropdown li a { 
-    padding: 15px 10px; 
-    display: block; 
-    color: white; 
-    text-decoration: none;
-    /* Remove default dark background from last fix */
-    background: transparent; 
-    border-radius: 0;
+    padding:10px; 
+    display:block; 
+    color:white; 
+    text-decoration:none;
 }
-/* Ensure the sub-links highlight correctly on hover */
 .dropdown li a:hover { 
-    background: #495057; 
-}
-/* Hide the main link's hover background when hovering over a sub-link */
-.nav-menu li:hover > a {
-    background: transparent; 
+    background:#6c757d; 
+    border-radius:0 0 6px 6px;
 }
 
 
