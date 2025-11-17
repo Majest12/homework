@@ -106,82 +106,85 @@ footer {
     margin-top:40px;
 }
 
-/* Navigation - MODIFIED TO SHOW DROPDOWNS PERMANENTLY */
+/* --- NAVIGATION FIXES --- */
 nav { 
     display:flex; 
     justify-content:space-between; 
     align-items:center; 
-    background:#343a40; /* Darker, sleek navigation bar */
+    background:#343a40; 
     padding:0 30px; 
     position:sticky; 
     top:0; 
     z-index:1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    /* NEW: Allow nav bar to wrap if content is wide */
     flex-wrap: wrap; 
 }
 .nav-menu { 
     list-style:none; 
-    display:flex; 
-    /* NEW: Reduced gap since dropdowns are inline */
-    gap: 0; 
+    /* Changed to display: contents so the <li> elements flow directly */
+    display: flex; 
     margin:0; 
     padding:0;
-    /* NEW: Adjust margin if it wraps */
     margin-right: 20px; 
 }
 .nav-menu > li { 
     position:relative;
-    /* NEW: Ensure main link and dropdown are on the same line/box */
-    display: inline-block; 
+    /* Force main list items to display inline */
+    display: flex;
+    align-items: center; 
 }
 .nav-menu > li > a::after { 
-    /* Remove the arrow indicator */
+    /* Hide the dropdown arrow */
     content: none; 
 }
 .nav-menu a { 
     display:block; 
-    padding:15px 15px; 
+    padding:15px 10px; /* Reduced padding slightly for more space */
     color:white; 
     font-weight:500; 
     text-decoration:none;
 }
-/* Disable hover effects on the main links since we want all links visible */
 .nav-menu li:hover > a { 
-    background: transparent; 
+    background: #495057; 
 }
-/* --- CRITICAL CHANGE: PERMANENTLY DISPLAY DROPDOWNS --- */
+
+/* --- CRITICAL FIX: PERMANENTLY DISPLAY SUB-MENUS INLINE --- */
 .dropdown { 
-    /* Change from display:block to inline-flex/flex for horizontal layout */
+    /* Force dropdown to display inline immediately after its parent link */
     display: flex; 
-    /* Remove all hiding properties */
-    max-height: none; 
-    overflow: visible; 
-    position: static; /* Make it flow naturally, not absolutely positioned */
-    top: auto; 
-    left: auto; 
-    background: transparent; /* Make the background transparent */
-    list-style:none; 
-    padding: 0; 
-    min-width: 0; 
-    box-shadow: none; 
-    opacity: 1; 
-    transition: none;
+    flex-direction: row; /* Display sub-items horizontally */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    /* REMOVE ALL HIDING PROPERTIES */
+    max-height: none !important;
+    overflow: visible !important;
+    position: static !important;
+    opacity: 1 !important;
+    background: transparent !important; 
+    box-shadow: none !important;
+    min-width: 0 !important;
+    transition: none !important;
 }
-/* No hover needed for dropdowns now */
-.nav-menu li:hover .dropdown { 
-    max-height: none; 
-    opacity: 1;
-}
+
+/* Style for the sub-links inside the dropdown */
 .dropdown li a { 
-    padding: 15px 10px; /* Adjust padding to match main links */
+    padding: 15px 10px; 
     display: block; 
     color: white; 
     text-decoration: none;
-    background: transparent;
+    /* Remove default dark background from last fix */
+    background: transparent; 
+    border-radius: 0;
 }
+/* Ensure the sub-links highlight correctly on hover */
 .dropdown li a:hover { 
-    background: #495057; /* Keep hover effect on sub-links */
+    background: #495057; 
+}
+/* Hide the main link's hover background when hovering over a sub-link */
+.nav-menu li:hover > a {
+    background: transparent; 
 }
 
 
@@ -190,12 +193,11 @@ nav {
     position:relative; 
     display: flex; 
     align-items: center;
-    /* NEW: Add margin to push away from the main menu */
     margin-left: 20px; 
 } 
 #search-input { 
     padding:10px 15px; 
-    border-radius:20px; /* Pill shape for a modern look */
+    border-radius:20px; 
     border:none; 
     outline:none; 
     width:200px;
@@ -207,7 +209,6 @@ nav {
 /* Mock Interaction Panel */
 .mock-layout-container { display:flex; gap:20px; margin-top:20px; min-height:400px;}
 .mock-list-panel { flex:1; background:#f0f8ff; padding:20px; border-radius:6px; border:1px solid #cceeff;}
-/* MODIFIED: Changed <a> to .media-item-link span style */
 .mock-list-panel ul li .media-item-link { 
     display:block; 
     padding:8px 10px; 
@@ -216,7 +217,7 @@ nav {
     color:#1a73e8; 
     border-left:5px solid transparent; 
     transition:background 0.2s, border-left 0.2s;
-    cursor: pointer; /* Indicate it's clickable */
+    cursor: pointer; 
 }
 .mock-list-panel ul li .media-item-link:hover { 
     background:#e8f0fe; 
@@ -225,7 +226,6 @@ nav {
 
 .mock-detail-panel { flex:2; padding:15px; border:1px solid #e0e0e0; border-radius:6px; background:#fff;}
 
-/* MODIFIED: Used JS controlled classes instead of :target */
 .media-detail-block { 
     display: block; 
     padding: 10px; 
@@ -238,7 +238,6 @@ nav {
     transition: opacity 0.4s, transform 0.4s, height 0.4s; 
 }
 
-/* NEW CLASS: Controls visibility via JavaScript */
 .media-detail-block.is-active {
     opacity: 1;
     transform: translateY(0);
@@ -248,7 +247,6 @@ nav {
     padding: 15px; 
 }
 
-/* Ensure default panel is shown correctly at startup */
 #detail-default.is-active { 
     border: 1px solid #e0e0e0;
     background: #f7f7f7;
