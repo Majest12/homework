@@ -210,23 +210,22 @@ class LibraryApp(QMainWindow):
             return
 
         # The ID is in the first column (index 0)
-        # Debug: log selected items and the cell used for ID
-        try:
-            row_index = selected_items[0].row()
-            id_cell = self.media_table.item(row_index, 0)
-            media_id = id_cell.text() if id_cell is not None else None
-            print(f"[DEBUG] display_selected_details called. row={row_index}, media_id_cell_text={media_id}")
-        except Exception as e:
-            print(f"[DEBUG] Error reading selected item: {e}")
-            media_id = None
+        media_id = self.media_table.item(selected_items[0].row(), 0).text()
         
         # Load the details from the API (Endpoint 4)
-        details = None
-        if media_id is not None:
-            details = self.api_client.get_media_details(media_id)
-            print(f"[DEBUG] API returned for id={media_id}: {details}")
-        else:
-            print("[DEBUG] No media_id could be determined from selection")
+        details = self.api_client.get_media_details(media_id)
+
+        if isinstance(details, dict) and "error" in details:
+            QMessageBox.critical(self, "API Error", details["error"])
+            self.delete_button.setEnabled(False)
+            return
+        
+        # Update detail labels
+        for field in METADATA_FIELDS:
+            # Ensure keys like "Publication date" are handled correctly
+            self.detail_labels[field].setText(str(details.get(field, "N/A")))
+            
+        self.delete_button.setEnabled(True)
 
         if isinstance(details, dict) and "error" in details:
             QMessageBox.critical(self, "API Error", details["error"])

@@ -73,6 +73,9 @@ class LibraryApp(QMainWindow):
         self.search_button.clicked.connect(self.search_media)
         control_layout.addWidget(self.search_button, 1, 2)
 
+        # Allow pressing Enter in the search input to trigger the search
+        self.search_input.returnPressed.connect(self.search_media)
+
         # Create Button (Endpoint 5)
         self.create_button = QPushButton("Create New Media")
         self.create_button.clicked.connect(self.show_create_dialog)
@@ -126,8 +129,11 @@ class LibraryApp(QMainWindow):
 
     def load_media(self, media_data=None):
         """Loads data into the table, handling potential errors."""
-        # Clear previous selection when loading new data to avoid stale detail display
+        # Clear any previous selection so old details do not remain
         self.media_table.clearSelection()
+        # Also clear detail labels immediately when loading new list
+        for label in self.detail_labels.values():
+            label.setText("N/A")
         self.delete_button.setEnabled(False)
         
         if media_data is None:
@@ -179,7 +185,10 @@ class LibraryApp(QMainWindow):
              QMessageBox.critical(self, "API Error", media_data["error"])
         else:
              self.load_media(media_data)
-             if not media_data:
+             # If results found, select the first row to trigger detail display
+             if media_data and len(media_data) > 0:
+                 self.media_table.selectRow(0)
+             else:
                  QMessageBox.information(self, "Search Result", f"No media found with the exact name: '{name}'.")
 
 
@@ -187,9 +196,10 @@ class LibraryApp(QMainWindow):
 
     def display_selected_details(self):
         """Displays metadata of the selected row (Endpoint 4)."""
-        # Use the selection model to get the selected rows reliably
+        # Use selection model to find selected row(s)
         selected_rows = self.media_table.selectionModel().selectedRows()
         if not selected_rows:
+            # Clear details if nothing is selected
             for label in self.detail_labels.values():
                 label.setText("N/A")
             self.delete_button.setEnabled(False)
@@ -198,22 +208,22 @@ class LibraryApp(QMainWindow):
         row = selected_rows[0].row()
         id_item = self.media_table.item(row, 0)
         media_id = id_item.text() if id_item is not None else None
-        print(f"[DEBUG] display_selected_details called. row={row}, media_id={media_id}")
 
-        if media_id is None:
+        if not media_id:
             for label in self.detail_labels.values():
                 label.setText("N/A")
             self.delete_button.setEnabled(False)
             return
 
+        # Load details from API
         details = self.api_client.get_media_details(media_id)
-        print(f"[DEBUG] API returned for id={media_id}: {details}")
 
         if isinstance(details, dict) and "error" in details:
             QMessageBox.critical(self, "API Error", details["error"])
             self.delete_button.setEnabled(False)
             return
 
+        # Update detail labels (ensure string conversion)
         for field in METADATA_FIELDS:
             self.detail_labels[field].setText(str(details.get(field, "N/A")))
 
