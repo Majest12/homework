@@ -126,6 +126,8 @@ class LibraryApp(QMainWindow):
 
     def load_media(self, media_data=None):
         """Loads data into the table, handling potential errors."""
+        # Clear previous selection when loading new data to avoid stale detail display
+        self.media_table.clearSelection()
         self.delete_button.setEnabled(False)
         
         if media_data is None:
@@ -185,29 +187,36 @@ class LibraryApp(QMainWindow):
 
     def display_selected_details(self):
         """Displays metadata of the selected row (Endpoint 4)."""
-        selected_items = self.media_table.selectedItems()
-        if not selected_items:
-            # Clear details if nothing is selected
+        # Use the selection model to get the selected rows reliably
+        selected_rows = self.media_table.selectionModel().selectedRows()
+        if not selected_rows:
             for label in self.detail_labels.values():
                 label.setText("N/A")
             self.delete_button.setEnabled(False)
             return
 
-        # The ID is in the first column (index 0)
-        media_id = self.media_table.item(selected_items[0].row(), 0).text()
-        
-        # Load the details from the API (Endpoint 4)
+        row = selected_rows[0].row()
+        id_item = self.media_table.item(row, 0)
+        media_id = id_item.text() if id_item is not None else None
+        print(f"[DEBUG] display_selected_details called. row={row}, media_id={media_id}")
+
+        if media_id is None:
+            for label in self.detail_labels.values():
+                label.setText("N/A")
+            self.delete_button.setEnabled(False)
+            return
+
         details = self.api_client.get_media_details(media_id)
+        print(f"[DEBUG] API returned for id={media_id}: {details}")
 
         if isinstance(details, dict) and "error" in details:
             QMessageBox.critical(self, "API Error", details["error"])
             self.delete_button.setEnabled(False)
             return
-        
-        # Update detail labels
+
         for field in METADATA_FIELDS:
-            self.detail_labels[field].setText(details.get(field, "N/A"))
-            
+            self.detail_labels[field].setText(str(details.get(field, "N/A")))
+
         self.delete_button.setEnabled(True)
 
     def show_create_dialog(self):
