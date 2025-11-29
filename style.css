@@ -93,6 +93,28 @@ nav {
     }
 }
 
+/* App screenshot section at bottom of page */
+#app-screenshot {
+    padding: 40px 20px;
+    background: #f5f5f5;
+    text-align: center;
+    margin-top: 40px;
+}
+
+#app-screenshot h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.app-screenshot-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
 /* ---------------- Media detail panel visibility ---------------- */
 /* Hide all detail blocks by default; only show the active one. */
 .media-detail-block {
