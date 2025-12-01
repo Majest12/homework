@@ -40,7 +40,17 @@ working Html
         <!-- Project Overview -->
         <section id="project-overview">
             <h2>Project Overview & Requirements</h2>
-            <p>This software solution manages metadata for various media types, providing a persistent backend API and a user-friendly graphical interface (GUI).</p>
+            <p>This software solution manages metadata for various media types,involves developing a two-part software solution—a Backend and a Frontend—to manage and display an online library (or "bookstore") of media metadata (books, films, magazines) The Backend, built with Flask, acts as a server storing media details and providing HTTP endpoints (a RESTful API) for listing, searching, creating, deleting, and viewing specific media items. The media data will be stored permanently using a JSON or Pickle file.
+
+The Frontend is a graphical user interface (GUI), built using a Python library like PyQt, PySide, or Tkinter. It consumes the Backend's API to:
+
+Display a comprehensive list of all media.
+
+Allow filtering by category (Book, Film, Magazine).
+
+Enable searching for media by name.
+
+Provide functionality to view detailed metadata, create new entries, and delete existing media.</p>
 
             <h3>Media Categories</h3>
             <ul>
