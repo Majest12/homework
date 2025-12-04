@@ -30,6 +30,42 @@ class LibraryApp(QMainWindow):
         self.setCentralWidget(central_widget)
         main_layout = QHBoxLayout(central_widget)
         
+        # Set a bright, nice background color and styling
+        central_widget.setStyleSheet("""
+            QWidget {
+                background-color: #f5f5f5;
+            }
+            QLabel {
+                color: #333;
+            }
+            QPushButton {
+                background-color: #1a73e8;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                border-radius: 5px;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background-color: #1557b0;
+            }
+            QTableWidget {
+                background-color: white;
+                alternate-background-color: #f9f9f9;
+                gridline-color: #ddd;
+            }
+            QTableWidget::item {
+                padding: 5px;
+            }
+            QComboBox, QLineEdit {
+                background-color: white;
+                color: #333;
+                border: 1px solid #ddd;
+                padding: 5px;
+                border-radius: 4px;
+            }
+        """)
+        
         # Left Panel: List and Controls
         self.list_panel = QWidget()
         list_layout = QVBoxLayout(self.list_panel)
