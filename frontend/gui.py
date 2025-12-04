@@ -34,9 +34,11 @@ class LibraryApp(QMainWindow):
         central_widget.setStyleSheet("""
             QWidget {
                 background-color: #f5f5f5;
+                color: #000;
             }
             QLabel {
-                color: #333;
+                color: #000;
+                background-color: transparent;
             }
             QPushButton {
                 background-color: #1a73e8;
@@ -53,16 +55,30 @@ class LibraryApp(QMainWindow):
                 background-color: white;
                 alternate-background-color: #f9f9f9;
                 gridline-color: #ddd;
+                color: #000;
             }
             QTableWidget::item {
                 padding: 5px;
+                color: #000;
+            }
+            QHeaderView::section {
+                background-color: #e8e8e8;
+                color: #000;
+                padding: 5px;
+                border: 1px solid #ddd;
+                font-weight: bold;
             }
             QComboBox, QLineEdit {
                 background-color: white;
-                color: #333;
+                color: #000;
                 border: 1px solid #ddd;
                 padding: 5px;
                 border-radius: 4px;
+            }
+            QComboBox QAbstractItemView {
+                background-color: white;
+                color: #000;
+                selection-background-color: #1a73e8;
             }
         """)
         
