@@ -115,15 +115,15 @@
             <h2>Backend (Flask) HTTP Endpoints</h2>
             <div class="accordion-content" id="api-list">
                 <h3>List Endpoints</h3>
-                <p><strong>List All Media:</strong> GET <code>/media</code> — returns an array of media metadata objects.</p>
-                <p><strong>List by Category:</strong> GET <code>/media?category=&lt;category&gt;</code> — returns filtered results.</p>
-                <p><strong>Display Metadata:</strong> GET <code>/media/&lt;id&gt;</code> — returns the metadata for a single item.</p>
+                <p><strong>List All Media:</strong> GET <code>/media</code>  returns an array of media metadata objects.</p>
+                <p><strong>List by Category:</strong> GET <code>/media?category=&lt;category&gt;</code> returns filtered results.</p>
+                <p><strong>Display Metadata:</strong> GET <code>/media/&lt;id&gt;</code> returns the metadata for a single item.</p>
             </div>
 
             <div class="accordion-content" id="api-crud">
                 <h3>Search & CRUD</h3>
                 <p><strong>Search by Name (Exact):</strong> GET <code>/media?name=&lt;name&gt;</code></p>
-                <p><strong>Create New Media:</strong> POST <code>/media</code> — payload includes name, author, date, category.</p>
+                <p><strong>Create New Media:</strong> POST <code>/media</code>  payload includes name, author, date, category.</p>
                 <p><strong>Update Metadata:</strong> PUT <code>/media/&lt;id&gt;</code></p>
                 <p><strong>Delete Media:</strong> DELETE <code>/media/&lt;id&gt;</code></p>
             </div>
@@ -158,10 +158,7 @@
                 </div>
 
                 <div class="mock-detail-panel">
-                    <h3>Backend Response: Detail View</h3>
                     <div id="detail-default" class="media-detail-block is-active">
-                        <p>Click on a media item in the list to simulate the API call and view its metadata.</p>
-                    </div>
 
                     <div id="detail-book1" class="media-detail-block">
                         <h4>Book: The Python Primer</h4>
