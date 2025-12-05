@@ -1,162 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Dynamic Media Search Library</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dynamic Media Search Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>📚 Online Media Library</h1>
-        <p>     Flask Backend + PyQt GUI Frontend</p>
-    </header>
+    <header>
+        <h1>📚 Online Media Library</h1>
+        <p>Flask Backend + PyQt GUI Frontend</p>
+    </header>
 
-    <nav>
-        <ul class="nav-menu">
-            <li>
-                <a href="#project-overview">Project</a>
-            </li>
-            <li>
-                <a href="#backend-api">Backend</a>
-            </li>
-            <li>
-                <a href="#frontend-features">Frontend</a>
-            </li>
-            <li><a href="#search-results-section">Search</a></li>
-        </ul>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="#project-overview">Project</a></li>
+            <li><a href="#backend-api">Backend</a></li>
+            <li><a href="#frontend-features">Frontend</a></li>
+            <li><a href="#search-results-section">Search</a></li>
+        </ul>
 
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search Title/Author..." aria-label="Search media">
-            <button id="search-button" style="padding: 10px 15px; margin-left: 10px; border-radius: 20px; border: none; background: #1a73e8; color: white; cursor: pointer; font-weight: 500;">🔍 Search</button>
-            <div class="search-results" id="search-results"></div>
-        </div>
-    </nav>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search Title/Author..." aria-label="Search media">
+            <button id="search-button" style="padding: 10px 15px; margin-left: 10px; border-radius: 20px; border: none; background: #1a73e8; color: white; cursor: pointer; font-weight: 500;">🔍 Search</button>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </nav>
 
-    <main>
-                <section id="project-overview">
-            <h2>Project Overview & Requirements</h2>
-            <p>This project is a two-part software system, a Flask Backend and a PyQt/PySide Frontend built to manage metadata for an online library of books, films, and magazines. The Backend stores media information in JSON and provides RESTful APIs for listing, searching, filtering, creating, deleting, and viewing media entries. The Frontend uses these APIs to display the library, show detailed metadata, and handle user interactions. Users can add new media by clicking "Create New Media" and filling in the required details, or delete an entry by selecting it, clicking "Delete Selected Media," and confirming the action.</p>
+    <main>
+        <!-- Project Overview -->
+        <section id="project-overview">
+            <h2>Project Overview & Requirements</h2>
+            <p>This project is a two-part software system, a Flask Backend and a PyQt/PySide Frontend built to manage metadata for an online library of books, films, and magazines. The Backend stores media information in JSON and provides RESTful APIs for listing, searching, filtering, creating, deleting, and viewing media entries. The Frontend uses these APIs to display the library, show detailed metadata, and handle user interactions. Users can add new media by clicking "Create New Media" and filling in the required details, or delete an entry by selecting it, clicking "Delete Selected Media," and confirming the action.</p>
 
-            <div style="display: flex; gap: 30px; align-items: flex-start;">
-                <div style="flex: 1;">
-                    <h3>Media Categories</h3>
-                    <ul>
-                        <li><strong>Book</strong></li>
-                        <li><strong>Film</strong></li>
-                        <li><strong>Magazine</strong></li>
-                    </ul>
+            <div style="display: flex; gap: 30px; align-items: flex-start;">
+                <div style="flex: 1;">
+                    <h3>Media Categories</h3>
+                    <ul>
+                        <li><strong>Book</strong></li>
+                        <li><strong>Film</strong></li>
+                        <li><strong>Magazine</strong></li>
+                    </ul>
 
-                    <h3>Stored Metadata</h3>
-                    <ol>
-                        <li>Name (Title)</li>
-                        <li>Publication date</li>
-                        <li>Author (or Director/Creator)</li>
-                        <li>Category</li>
-                    </ol>
-                </div>
+                    <h3>Stored Metadata</h3>
+                    <ol>
+                        <li>Name (Title)</li>
+                        <li>Publication date</li>
+                        <li>Author (or Director/Creator)</li>
+                        <li>Category</li>
+                    </ol>
+                </div>
 
-                <div style="flex: 1; text-align: center;">
-                                        <img src="images/all media.png" alt="All Media View" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                                        <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>All Media View:</strong> The interface displays all media in the library, showing their metadata. The panel on the right presents detailed information about the selected film.</p>
-                </div>
-            </div>
-        </section>
+                <div style="flex: 1; text-align: center;">
+                    <img src="images/all media.png" alt="All Media View" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>All Media View:</strong> The interface displays all media in the library, showing their metadata. The panel on the right presents detailed information about the selected film.</p>
+                </div>
+            </div>
+        </section>
 
----
+        <!-- Architecture -->
+        <section id="architecture">
+            <h2>System Architecture</h2>
 
-                <section id="architecture">
-            <h2>System Architecture</h2>
-            <div class="accordion-content" id="architecture-back-overview">
-                <h3>Summary</h3>
-                <div style="display: flex; gap: 30px; align-items: flex-start;">
-                    <div style="flex: 1;">
-                        <p>The system uses a two-tier architecture: The <strong>Backend (Flask)</strong> that handles data persistence & API; and the <strong>Frontend (PyQt/PySide)</strong> as a desktop GUI client communicating via HTTP/JSON.</p>
-                        
-                                                <img src="images/PyQt.png" alt="System Flow Diagram" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 10px;">
-                        <p style="margin-top: 15px; color: #333; font-size: 0.9em;">
-                            <strong>Flow Summary:</strong><br>
-                            User → GUI → Flask Endpoint → JSON Storage → Flask → GUI → User
-                        </p>
-                        
-                    </div>
-                    <div style="flex: 1; text-align: center;">
-                        <img src="images/category.png" alt="Category View" style="max-width: 80%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                        <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Category Filter View:</strong>The interface displays all films in the library, showing their metadata. The panel on the right presents detailed information about the selected film. .</p>
-                    </div>
-                </div>
-            </div>
+            <div class="accordion-content" id="architecture-back-overview">
+                <h3>Summary</h3>
+                <div style="display: flex; gap: 30px; align-items: flex-start;">
+                    <div style="flex: 1;">
+                        <p>The system uses a two-tier architecture: The <strong>Backend (Flask)</strong> that handles data persistence & API; and the <strong>Frontend (PyQt/PySide)</strong> as a desktop GUI client communicating via HTTP/JSON.</p>
+                        <!-- Updated Image and Description -->
+                        <div style="text-align: center; margin-top: 20px;">
+                            <img src="images/PyQt.png" alt="System Architecture Flow" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                            <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
+                                <strong>System Architecture:</strong> Flow Summary: <br>
+                                User → GUI → Flask Endpoint → JSON Storage → Flask → GUI → User
+                            </p>
+                        </div>
+                    </div>
 
-            <div class="accordion-content" id="architecture-backend">
-                <h3>Backend (Flask)</h3>
-                <p>The backend handles data persistence (JSON/Pickle) and HTTP API requests. It provides CRUD operations for all media types and exposes endpoints such as:</p>
-                <ul>
-                    <li><code>GET /media</code>  list all media</li>
-                    <li><code>GET /media?category=Book</code> filter by category</li>
-                    <li><code>GET /media/{id}</code> get metadata</li>
-                    <li><code>POST /media</code> create</li>
-                    <li><code>PUT /media/{id}</code>  update</li>
-                    <li><code>DELETE /media/{id}</code>  delete</li>
-                </ul>
-            </div>
+                    <div style="flex: 1; text-align: center;">
+                        <img src="images/category.png" alt="Category View" style="max-width: 80%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Category Filter View:</strong> The interface displays all films in the library, showing their metadata. The panel on the right presents detailed information about the selected film.</p>
+                    </div>
+                </div>
+            </div>
 
-            <div class="accordion-content" id="architecture-frontend">
-                <h3>Frontend (PyQt/PySide)</h3>
-                <p>The frontend is a desktop GUI application that interacts with the backend API to display media lists, perform searches, and present metadata. It also offers create/edit/delete functionality via forms that call the API.</p>
-            </div>
-        </section>
+            <div class="accordion-content" id="architecture-backend">
+                <h3>Backend (Flask)</h3>
+                <p>The backend handles data persistence (JSON/Pickle) and HTTP API requests. It provides CRUD operations for all media types and exposes endpoints such as:</p>
+                <ul>
+                    <li><code>GET /media</code>  list all media</li>
+                    <li><code>GET /media?category=Book</code> filter by category</li>
+                    <li><code>GET /media/{id}</code> get metadata</li>
+                    <li><code>POST /media</code> create</li>
+                    <li><code>PUT /media/{id}</code>  update</li>
+                    <li><code>DELETE /media/{id}</code>  delete</li>
+                </ul>
+            </div>
 
----
+            <div class="accordion-content" id="architecture-frontend">
+                <h3>Frontend (PyQt/PySide)</h3>
+                <p>The frontend is a desktop GUI application that interacts with the backend API to display media lists, perform searches, and present metadata. It also offers create/edit/delete functionality via forms that call the API.</p>
+            </div>
+        </section>
 
-                <section id="backend-api">
-            <h2>Backend (Flask) HTTP Endpoints</h2>
-            <div class="accordion-content" id="api-list">
-                <h3>List Endpoints</h3>
-                <p><strong>List All Media:</strong> GET <code>/media</code>  returns an array of media metadata objects.</p>
-                <p><strong>List by Category:</strong> GET <code>/media?category=&lt;category&gt;</code> returns filtered results.</p>
-                <p><strong>Display Metadata:</strong> GET <code>/media/&lt;id&gt;</code> returns the metadata for a single item.</p>
-            </div>
+        <!-- Backend/API -->
+        <section id="backend-api">
+            <h2>Backend (Flask) HTTP Endpoints</h2>
+            <div class="accordion-content" id="api-list">
+                <h3>List Endpoints</h3>
+                <p><strong>List All Media:</strong> GET <code>/media</code>  returns an array of media metadata objects.</p>
+                <p><strong>List by Category:</strong> GET <code>/media?category=&lt;category&gt;</code> returns filtered results.</p>
+                <p><strong>Display Metadata:</strong> GET <code>/media/&lt;id&gt;</code> returns the metadata for a single item.</p>
+            </div>
 
-            <div class="accordion-content" id="api-crud">
-                <h3>Search & CRUD</h3>
-                <p><strong>Search by Name (Exact):</strong> GET <code>/media?name=&lt;name&gt;</code></p>
-                <p><strong>Create New Media:</strong> POST <code>/media</code>  payload includes name, author, date, category.</p>
-                <p><strong>Update Metadata:</strong> PUT <code>/media/&lt;id&gt;</code></p>
-                <p><strong>Delete Media:</strong> DELETE <code>/media/&lt;id&gt;</code></p>
-            </div>
-        </section>
+            <div class="accordion-content" id="api-crud">
+                <h3>Search & CRUD</h3>
+                <p><strong>Search by Name (Exact):</strong> GET <code>/media?name=&lt;name&gt;</code></p>
+                <p><strong>Create New Media:</strong> POST <code>/media</code>  payload includes name, author, date, category.</p>
+                <p><strong>Update Metadata:</strong> PUT <code>/media/&lt;id&gt;</code></p>
+                <p><strong>Delete Media:</strong> DELETE <code>/media/&lt;id&gt;</code></p>
+            </div>
+        </section>
 
----
+        <!-- Frontend features -->
+        <section id="frontend-features">
+            <h2>Frontend (PyQt/PySide) GUI Features</h2>
+            <div class="accordion-content" id="gui-visual">
+                <h3>Data Visualization</h3>
+                <p>Display lists with title, author, publication date and category. Sorting and simple charts could be added as enhancements.</p>
+            </div>
+        </section>
 
-                <section id="frontend-features">
-            <h2>Frontend (PyQt/PySide) GUI Features</h2>
-            <div class="accordion-content" id="gui-visual">
-                <h3>Data Visualization</h3>
-                <p>Display lists with title, author, publication date and category. Sorting and simple charts could be added as enhancements.</p>
-            </div>
+        <!-- Search results -->
+        <section id="search-results-section">
+            <h2>🔍 Media Search Results</h2>
+            <p>Enter a title, author, or keyword in the search bar above and click 'Search' to view results from the mocked library database.</p>
+            <div id="results-container">
+                <p style="font-style: italic; color: #555;"></p>
+            </div>
+        </section>
+    </main>
 
-            
-        </section>
-           
+    <footer>
+        <p>&copy; 2025 Online Media Library Project | Full-Stack Python Solution</p>
+        <p>&copy; Author: Elvis Abongnifor | Applied Mechatronics Systems Engineering</p>
+        <p>&copy; Advanced Programming </p>
+    </footer>
 
-
-                  <section id="search-results-section">
-            <h2>🔍 Media Search Results</h2>
-            <p>Enter a title, author, or keyword in the search bar above and click 'Search' to view results from the mocked library database.</p>
-
-            <div id="results-container">
-                <p style="font-style: italic; color: #555;"></p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Online Media Library Project | Full-Stack Python Solution</p>
-        <p>&copy;  Author: Elvis Abongnifor | Applied Mechatronics Systems Engineering</p>
-        <p>&copy;  Advanced Programming </p>
-    </footer>
-
-    <script src="script.js?v=1.4"></script>
+    <script src="script.js?v=1.4"></script>
 </body>
 </html>
