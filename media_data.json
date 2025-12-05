@@ -75,5 +75,19 @@
         "Publication date": "1960-07-11",
         "Author": "Harper Lee",
         "Category": "Book"
+    },
+    "12": {
+        "id": "12",
+        "Name": "The Economist",
+        "Publication date": "1843",
+        "Author": "James Wilson",
+        "Category": "Magazine"
+    },
+    "13": {
+        "id": "13",
+        "Name": "Scientific American",
+        "Publication date": "1845",
+        "Author": "Rufus Porter",
+        "Category": "Magazine"
     }
 }
