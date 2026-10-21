@@ -94,7 +94,7 @@ def create_new_media():
     # Validation
     required_fields = ['name', 'publication_date', 'author', 'category']
     if not all(field in data for field in required_fields):
-        return jsonify({"message": "Missing required field(s). Required: name, publication_date, author, category"}), 400
+        return jsonify({"message": "Missing required field(s). required: name, publication_date, author, category"}), 400
     
     if data['category'] not in CATEGORIES:
         return jsonify({"message": f"Invalid category. Must be one of: {', '.join(CATEGORIES)}"}), 400
